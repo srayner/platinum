@@ -1,0 +1,24 @@
+<?php
+$title = 'Edit inventory category';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action',$this->url('categories', array('action' => 'edit', 'id'=>$this->id)));
+$form->get('submit')->setAttribute('label', 'Edit');
+echo $this->form()->openTag($form);
+?>
+<dl class="zend_form">
+<?php echo $this->formInput($form->get('id')); ?>
+<dt><?php echo $this->formLabel($form->get('name')); ?></dt>
+<dd><?php
+echo $this->formInput($form->get('name'));
+echo $this->formElementErrors($form->get('name'));
+?></dd>
+<dd><?php
+echo $this->formInput($form->get('submit'));
+echo $this->formElementErrors($form->get('submit'));
+?></dd>
+</dl>
+<?php echo $this->form()->closeTag($form); ?>

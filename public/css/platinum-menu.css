@@ -1,0 +1,89 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	padding-top: 60px;
+}
+
+.fixed{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	background-color: #000;
+	margin-bottom: 10px;
+	z-index: 4000;
+}
+
+.brand{
+    background: url("../images/zf2-logo.png") no-repeat scroll 0 10px transparent;
+    color: #fff;
+    display: block;
+    float: left;
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 1;
+    padding: 8px 20px 12px 40px;
+    text-decoration: none;
+}
+
+.brand:hover, .brand:visited, .brand:focus{
+	color: #fff;
+}
+
+.platinum-menu{
+	margin: 0;
+}
+
+.platinum-menu > li{
+	float:left;
+	border: none;
+	padding: 10px;
+	margin: 0;
+	background-color: #000;
+	color: #fff;
+	position: relative;
+}
+
+.platinum-menu > li:hover{
+	background-color: #937c37;
+}
+
+.platinum-menu li ul{
+	display: none;
+	border: 2px solid #EFEFEF;
+	background-color: #fff;
+	margin: 0;
+	padding: 10px;
+	position: absolute;
+	top: 38px;
+	left: 0px;
+	z-index: 5000;
+}
+
+.platinum-menu li ul li{
+	margin: 0;
+}
+.platinum-menu li:hover > ul {display: block;}
+
+.platinum-menu a{
+	background-color: #fff;
+    background-image: none;
+    border-color: #EFEFEF;
+    border-radius: 0 0 0 0;
+    border-style: solid;
+    border-width: 0 0 1px;
+    color: #000000;
+    font: 11px Trebuchet MS,sans-serif;
+    padding: 4px;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: 0 0 0 #FFFFFF;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.platinum-menu a:hover{
+	color: #5353ff;
+	background-color: #e0e0ff;
+}

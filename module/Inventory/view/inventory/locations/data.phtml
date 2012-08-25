@@ -1,0 +1,24 @@
+<?php
+
+// Output
+$output = array(
+		"sEcho" => $sEcho,
+		"iTotalRecords" => $iTotalRecords,
+		"iTotalDisplayRecords" => $iTotalDisplayRecords,
+		"aaData" => array()
+);
+
+foreach($locations as $location)
+{
+	$actions = '<a class="icon edit" title="Edit" href="' . $this->url(
+			'locations', array('action'=>'edit', 'id' => $location->id)) . '"></a>' .
+			'<a class="icon delete" title="Delete" href="' . $this->url(
+					'locations', array('action'=>'delete', 'id' => $location->id)) . '"></a>';
+	 
+	$row = array();
+	$row[] = $this->escapeHtml($location->location_code);
+	$row[] = $this->escapeHtml($location->location_name);
+	$row[] = $actions;
+	$output['aaData'][] = $row;
+}
+echo json_encode($output);

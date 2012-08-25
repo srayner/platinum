@@ -1,0 +1,36 @@
+@CHARSET "ISO-8859-1";
+
+.field {
+    margin-bottom: 1.5em;
+    float: left;
+    width: 100%;	
+}
+
+label {
+    color: #444444;
+    display: block;
+    float: left;
+    font-weight: bold;
+    margin-right: 10px;
+    padding-right: 10px;
+    position: relative;
+    text-align: right;
+    width: 125px;
+}
+
+input {
+    border: 1px solid #CCCCCC;
+    margin-right: 1em;
+    padding: 4px;
+    width: 200px;
+}
+
+input:focus {
+	background-color: #ffffcc;
+}
+
+input[type=submit] {
+	float:right;
+	width:100px;
+	border:solid 1px;
+}

@@ -1,0 +1,18 @@
+<?php
+$title = 'Delete inventory item';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>Are you sure that you want to delete
+'<?php echo $this->escapeHtml($item['item_code']); ?>',   
+'<?php echo $this->escapeHtml($item['short_description']); ?>'?
+</p>
+<?php
+$url = $this->url('items', array('action' => 'delete', 'id'=>$this->id)); ?>
+<form action="<?php echo $url; ?>" method="post">
+<div>
+<input type="hidden" name="id" value="<?php echo (int)$item['id']; ?>" />
+<input type="submit" name="del" value="Yes" />
+<input type="submit" name="del" value="No" />
+</div>
+</form>

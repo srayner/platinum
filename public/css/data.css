@@ -1,0 +1,248 @@
+@CHARSET "ISO-8859-1";
+
+.hidden{
+	display: none;
+}
+
+h1,h2,h3,h4,h5,h6{
+    color: #222222;
+    font-family: Helvetica,Arial,sans-serif;
+    font-weight: bold;	
+}
+
+.widget-header h3{
+	float: left;
+    padding: 12px 15px 10px;
+    vertical-align: baseline;
+    font-size: 17px;
+    line-height: 1;	
+}
+
+.widget{
+	border-radius: 6px 6px 6px 6px;
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    margin: 0 0 20px;
+}
+
+.widget-header{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: url("../images/bg-content-box.gif") repeat-x scroll left top #E5E5E5;
+    height: 40px;
+    margin-top: 1px;
+}
+
+.widget-content{
+	border-top: 1px solid #CCCCCC;
+    font-size: 13px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+table.data{
+	border: 0 none;
+	border-collapse: collapse;
+	border-spacing: 0;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+    line-height: 1;
+    width: 100%;
+    clear: both;
+}
+
+table.data tr.odd{
+	background: none repeat scroll 0 0 #F2F2F2;
+}
+
+table.data tr.even{
+	background: none repeat scroll 0 0 #FAFAFA;
+}
+
+table.data thead th {
+    border-bottom: 1px solid #DDDDDD;
+    font-family: Tahoma, san-serif;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: left;
+    line-height: 1.3em;
+    padding: 6px 18px 6px 6px;
+    cursor: pointer;
+}
+table.data thead th.no-sort{
+	cursor: default;
+}
+
+table.data tbody{
+	border-bottom: 1px solid #DDDDDD;
+}
+
+table.data tbody td {
+	font-family: Tahoma, san-serif;
+	font-size: 11px;
+	font-weight: normal;
+	padding: 6px;
+	vertical-align: middle;
+}
+
+.notification{
+	font-size: 13px;
+    margin: 0 0 15px;
+    padding: 0;
+    position: relative;
+    width: 99.8%;
+    border: 1px solid;
+    border-radius: 6px 6px 6px 6px;
+}
+
+.notification div {
+    display: block;
+    font-style: normal;
+    line-height: 1.5em;
+    padding: 10px 10px 10px 36px;
+}
+
+.notification .close {
+    color: #990000;
+    font-size: 9px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    text-decoration: none;
+}
+
+.attention{
+	background: url("../images/exclamation.png") no-repeat scroll 10px 11px #FFFBCC;
+    border-color: #E6DB55;
+    color: #666452;
+}
+
+.information{
+	background: url("../images/information.png") no-repeat scroll 10px 11px #DBE3FF;
+    border-color: #A2B4EE;
+    color: #585B66;
+}
+
+.success{
+	background: url("../images/tick_circle.png") no-repeat scroll 10px 11px #D5FFCE;
+    border-color: #9ADF8F;
+    color: #556652;
+}
+
+.error{
+    background: url("../images/cross_circle.png") no-repeat scroll 10px 11px #FFCECE;
+    border-color: #DF8F8F;
+    color: #665252;	
+}
+
+/* Datatables */
+.dataTables_wrapper {
+	position: relative;
+	clear: both;
+	zoom: 1; /* Feeling sorry for IE */
+}
+
+.dataTables_length {
+	width: 40%;
+	float: left;
+}
+
+.dataTables_length select{
+	display: inline;
+	width: 50px;
+}
+
+.dataTables_filter {
+	width: 50%;
+	float: right;
+	text-align: right;
+}
+
+.dataTables_filter input{
+	display: inline;
+	padding: 2px;
+}
+
+table.display {
+	margin: 0 auto;
+	clear: both;
+	width: 100%;
+	
+	/* Note Firefox 3.5 and before have a bug with border-collapse
+	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 ) 
+	 * border-spacing: 0; is one possible option. Conditional-css.com is
+	 * useful for this kind of thing
+	 *
+	 * Further note IE 6/7 has problems when calculating widths with border width.
+	 * It subtracts one px relative to the other browsers from the first column, and
+	 * adds one to the end...
+	 *
+	 * If you want that effect I'd suggest setting a border-top/left on th/td's and 
+	 * then filling in the gaps with other borders.
+	 */
+}
+
+.dataTables_info {
+	padding-top: 20px;
+	width: 60%;
+	float: left;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 10px;
+    color: #57A000;
+}
+
+.dataTables_paginate {
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 10px;
+    padding: 20px 0 5px;
+    text-align: right;
+    float: right;
+}
+
+.dataTables_paginate a {
+    margin: 0 5px 0 0;
+    padding: 3px 6px;
+    color: #57A000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.paginate_active{
+	border-radius: 4px 4px 4px 4px;
+    background: url("../images/bg-button-green.gif") repeat-x scroll left top #469400 !important;
+    border-color: #459300 !important;
+    color: #FFFFFF !important;
+    border: 1px solid #DDDDDD;
+    margin: 0 5px 0 0;
+    padding: 3px 6px;
+    color: #57A000;
+    text-decoration: none;
+}
+
+/* DataTables sorting */
+.sorting_asc {background: url('images/sort_asc.png') no-repeat center right;}
+.sorting_desc {background: url('images/sort_desc.png') no-repeat center right;}
+.sorting {background: url('images/sort_both.png') no-repeat center right;}
+.sorting_asc_disabled {background: url('images/sort_asc_disabled.png') no-repeat center right;}
+.sorting_desc_disabled {background: url('images/sort_desc_disabled.png') no-repeat center right;}
+
+.dataTable tr{
+	border: 1px solid #E6E6E6;
+}
+
+/* Action Icons */
+.icon{
+	height: 16px;
+	width: 16px;
+	display: block;
+	float: left;
+	padding-right: 8px;
+}
+.data a.edit{background: url(images/Edit_16x16.png) no-repeat 0 0 transparent;}
+.data a.delete{background: url(images/Delete_16x16.png) no-repeat 0 0 transparent;}

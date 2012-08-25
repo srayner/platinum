@@ -1,0 +1,115 @@
+{
+    "hash": "7b8f265a63cfce06359a21677eb577e1",
+    "packages": [
+        {
+            "package": "doctrine/common",
+            "version": "2.3.x-dev",
+            "source-reference": "2ec4bc6db13db6a0976a16b71058083c55cbcdbd",
+            "commit-date": "1343847076"
+        },
+        {
+            "package": "doctrine/data-fixtures",
+            "version": "dev-master",
+            "source-reference": "779c3dfe446b6da893be87b908d6be28345d1e01",
+            "commit-date": "1341780535"
+        },
+        {
+            "package": "doctrine/dbal",
+            "version": "2.3.x-dev",
+            "source-reference": "6470e2089e9ab4a2d24e6927ebe073b7935d7ed5",
+            "commit-date": "1344980709"
+        },
+        {
+            "package": "doctrine/doctrine-module",
+            "version": "dev-master",
+            "source-reference": "55aa93bda85d1030aea8ee57fd7b5c52ddf72dee",
+            "commit-date": "1345104598"
+        },
+        {
+            "package": "doctrine/doctrine-orm-module",
+            "version": "dev-master",
+            "source-reference": "6135d2219e5da7d99814697ac32ac4568ce419a9",
+            "commit-date": "1344942080"
+        },
+        {
+            "package": "doctrine/migrations",
+            "version": "dev-master",
+            "source-reference": "b86b4cc0a39714f0aa53b908d495beacfa0e4011",
+            "commit-date": "1343202693"
+        },
+        {
+            "package": "doctrine/orm",
+            "version": "2.3.x-dev",
+            "source-reference": "971865f271771a3b06c474dfea9e91f023837cce",
+            "commit-date": "1344977483"
+        },
+        {
+            "package": "symfony/console",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/console",
+            "version": "dev-master",
+            "source-reference": "3b66f1056f5ac37146d3b755964e8a43a205f2f5",
+            "commit-date": "1344349441"
+        },
+        {
+            "package": "symfony/yaml",
+            "version": "dev-master",
+            "source-reference": "6b3eb66a7c4495dcaa35a64dd93c8ba8c29f35d8",
+            "commit-date": "1344325256"
+        },
+        {
+            "package": "zendframework/zendframework",
+            "version": "dev-master",
+            "alias-pretty-version": "2.0.x-dev",
+            "alias-version": "2.0.9999999.9999999-dev"
+        },
+        {
+            "package": "zendframework/zendframework",
+            "version": "dev-master",
+            "source-reference": "57c7d09278d0f2db3a1c1a63eac4277f9ab7cf72",
+            "commit-date": "1345841008"
+        },
+        {
+            "package": "zf-commons/zfc-acl",
+            "version": "dev-master",
+            "source-reference": "1379ca8c434d3d3c263c76436fe47d307156c545",
+            "commit-date": "1339423159"
+        },
+        {
+            "package": "zf-commons/zfc-base",
+            "version": "dev-master",
+            "source-reference": "864c7c45cefb77321845563eba2a7f83f284132f",
+            "commit-date": "1344908144"
+        },
+        {
+            "package": "zf-commons/zfc-user",
+            "version": "dev-master",
+            "source-reference": "86a654ba47fb3e89c9438cfa64cbdc3e8f8d025b",
+            "commit-date": "1345835927"
+        },
+        {
+            "package": "zf-commons/zfc-user-doctrine-orm",
+            "version": "dev-master",
+            "source-reference": "59ddae7052a80f1bbe24b58fdebc4e8904e75ab4",
+            "commit-date": "1342797397"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "zendframework/zendframework": 20,
+        "doctrine/doctrine-module": 20,
+        "doctrine/doctrine-orm-module": 20,
+        "zf-commons/zfc-base": 20,
+        "zf-commons/zfc-user": 20,
+        "zf-commons/zfc-user-doctrine-orm": 20,
+        "zf-commons/zfc-acl": 20
+    }
+}

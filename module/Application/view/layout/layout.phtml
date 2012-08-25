@@ -1,0 +1,92 @@
+<?php
+$this->headTitle()->setSeparator(' - ')
+                  ->setAutoEscape(false);
+$basePath = $this->basePath();
+
+// Stylesheets
+$this->headLink()->appendStylesheet($basePath . '/css/base.css')
+                 ->appendStylesheet($basePath . '/css/layout.css')
+                 ->appendStylesheet($basePath . '/css/skeleton.css')
+                 ->appendStylesheet($basePath . '/css/data.css')
+                 ->appendStylesheet($basePath . '/css/platinum-menu.css');
+
+// Favicon
+$this->headLink(array(
+            'rel'  => 'shortcut icon',
+            'type' => 'image/vnd.microsoft.icon',
+            'href' => $basePath . '/images/favicon.ico',
+        ));
+
+// HTML5 shim, for IE6-8 support of HTML elements
+$this->headScript()->appendFile($basePath . '/js/html5.js', 'text/javascript',
+    array('conditional' => 'lt IE 9',));
+
+// JQuery.
+$this->headScript()->prependFile($basePath . '/js/jquery-1.7.2.min.js', 'text/javascript');
+
+// Doctype.
+echo $this->doctype();
+?>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('Platinum Application') ?>
+
+    <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+    <!-- Styles -->
+    <?php echo $this->headLink() ?>
+
+    <!-- Scripts -->
+    <?php echo $this->headScript() ?>
+
+  </head>
+
+  <body>
+  <div class="fixed">
+    <div class="container">
+      <a class="brand">Platinum</a>
+      <ul class="platinum-menu">
+        <li>Inventory
+          <ul>
+            <li><a href="#">Inventory Location Transfers</a></li>
+            <li><a href="#">Inventory Stock Adjustments</a></li>
+            <li><a href="#">Item Status</a></li>
+            <li><a href="#">Movements</a></li>
+            <li><a href="#">Valuation Report</a></li>
+            <li><a href="#">Stock check sheets</a></li>
+            <li><a href="#">Items</a></li>
+            <li><a href="#">Item Categories</a><li>
+            <li><a href="#">Inventory Locations</a></li>
+          </ul>  
+        </li>
+        <li>Sales
+          <ul>
+            <li><a href="#">Sales Order Entry</a></li>
+            <li><a href="#">Sales Order Dispatch</a></li>
+            <li><a href="#">Customer Accounts</a></li>
+            <li><a href="#">Invoice</a></li>
+          </ul>
+        </li>
+        <li>Purchasing
+          <ul>
+            <li><a href="#">Purchase Order Entry</a></li>
+            <li><a href="#">Goods Receipt</a></li>
+            <li><a href="#">Supplier Accounts</a></li>
+            <li><a href="#">Remitance</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>  
+    <div id="content" class="container">
+      <?php echo $this->content; ?>
+    </div> <!-- /container -->
+    
+    <div id="footer">
+        <p>&copy; 2012 by Civray Software. All rights reserved.</p>
+    </div>
+
+  </body>
+</html>
