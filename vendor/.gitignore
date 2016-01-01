@@ -1,8 +1,0 @@
-!.gitignore
-.composer
-composer
-doctrine
-symphony
-zendframework
-zf-commons
-autoload.php
