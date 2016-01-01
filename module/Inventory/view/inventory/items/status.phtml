@@ -1,0 +1,29 @@
+<?php
+$title = 'Inventory item';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
+	
+	<div class="widget-header">
+	    <h4>Item Properties</h4>
+	</div>
+	
+	<div class="widget-content">
+	    <dl class="dl-horizontal">
+	        <dt>Item Code</dt>
+	        <dd><?php echo($item->item_code)?></dd>
+	        <dt>Description</dt>
+	        <dd><?php echo($item->short_description)?></dd>
+	        <dt>Stock Quantity</dt>
+	        <dd>
+	            <?php echo($qty)?>
+	            <a href="<?php echo $this->url('inventory/default', array(
+                    'controller' => 'items',
+                    'action'=>'locations',
+	                'id' => $item->id
+                ));?>">locations</a>
+            </dd>
+	    </dl>
+	</div>
+</div>

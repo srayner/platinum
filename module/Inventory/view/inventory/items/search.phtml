@@ -1,0 +1,11 @@
+<?php
+$output = array();
+foreach($items as $item)
+{
+    $row = array(
+        'id' => $item->id,
+        'item_code' => $item->item_code
+    );
+    $output[] = $row;
+}
+echo json_encode($output);

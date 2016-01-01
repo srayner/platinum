@@ -2,25 +2,20 @@
 $title = 'Edit inventory item';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
 <div class="widget">
+	
 	<div class="widget-header">
-	    <h3>Item Properties</h3>
+	    <h4>Item Properties</h4>
 	</div>
 	
 	<div class="widget-content">
-<?php
-$form = $this->form;
-$form->setAttribute('action', $this->url('items', array('action' => 'edit', 'id'=>$this->id)));
-$form->get('submit')->setAttribute('value', 'Edit');
-$form->prepare();
-echo $this->form()->openTag($form);
-echo $this->formHidden($form->get('id'));
-echo $this->formRow($form->get('item_code'));
-echo $this->formRow($form->get('short_description'));
-echo $this->formRow($form->get('category_id'));
-echo $this->formInput($form->get('submit'));
-echo $this->form()->closeTag($form);
-?>
+        <?php
+        $form = $this->form;
+        $form->setAttribute('action', $this->url('inventory/default', array('controller' => 'items', 'action' => 'edit', 'id'=>$this->id)));
+        $form->get('submit')->setAttribute('value', 'Edit');
+        echo $this->RenderForm($form);
+        ?>
     </div>
+    
 </div>

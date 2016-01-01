@@ -53,7 +53,7 @@ class LocationForm extends Form
 		
 		// phone number.
 		$this->add(array(
-				'name' => 'phone_no',
+				'name' => 'phone',
 				'options' => array(
 						'label' => 'Telephone Number'
 				),
@@ -64,7 +64,7 @@ class LocationForm extends Form
 		
 		// fax number.
 		$this->add(array(
-				'name' => 'fax_no',
+				'name' => 'fax',
 				'options' => array(
 						'label' => 'Fax Number'
 				),
@@ -87,9 +87,10 @@ class LocationForm extends Form
 		$this->add(array(
 				'name' => 'submit',
 				'attributes' => array(
-						'type' => 'submit',
+						'type' => 'Submit',
 						'value' => 'Go',
 						'id' => 'submitbutton',
+				        'class' => 'btn btn-primary'
 				),
 		));
 

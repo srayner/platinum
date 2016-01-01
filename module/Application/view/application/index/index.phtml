@@ -1,30 +1,12 @@
 
-<h3>Transactions</h3>
-<a href="<?php echo $this->url('items', array(
-	'action'=>'transfer'
-));?>">Inventory Location Transfers</a><br>
-<a href="<?php echo $this->url('items', array(
-	'action'=>'adjust'
-));?>">Inventory Adjustments</a><br><br>
+<a href="<?php echo $this->url('inventory');?>"><h3>Inventory</h3></a>
+<p>Inventory control management module. From here you can view and manage current stock, review past stock
+movements and setup new inventory items.</p>
 
-<h3>Inquiries &amp Reports</h3>
-<a href="<?php echo $this->url('items', array(
-    'action'=>'status'
-));?>">Item Status</a><br>
-<a>Movements</a><br>
-<a>Valuation Report</a><br>
-<a>Stock check sheets</a><br><br>
+<a href="<?php echo $this->url('default');?>"><h3>Sales</h3></a>
+<p>Sales order processing module. This module manages the life cycle of sales orders from order entry through to
+payment receipt. From here you can manage customer accounts, sales orders and invoicing.</p>
 
-<h3>Maintenance</h3>
-<a href="<?php echo $this->url('items', array(
-    'action'=>'index'
-));?>">Items</a><br>
-<a href="<?php echo $this->url('categories', array(
-    'action'=>'index'
-));?>">Item Categories</a><br>
-<a href="<?php echo $this->url('locations', array(
-    'action'=>'index'
-));?>">Inventory Locations</a><br>
-<a>Movement Types</a><br>
-<a>Units of Measure</a><br>
-<a>Sales Pricing</a><br>
+<a href="<?php echo $this->url('default');?>"><h3>Purchasing</h3></a>
+<p>Purchase order processing module. This module manages the life cycle of purchase orders from order entry through
+to payment. From here you can manage purchase orders, suppliers accounts and goods receipts. </p>

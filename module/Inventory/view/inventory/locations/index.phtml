@@ -5,14 +5,27 @@
     $this->headScript()->appendFile('/js/inventory/locations/index.js', 'text/javascript');
 ?>
 
-<h1><?php echo $this->escapeHtml($title); ?></h1>
-<p><a href="<?php echo $this->url('locations', array(
-'action'=>'add'));?>">Add new inventory location</a></p>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<p><a href="<?php echo $this->url('inventory/default', array(
+    'controller' => 'locations',
+    'action'=>'add'
+));?>">Add new inventory location</a></p>
 
 <div class="widget">
     <div class="widget-header">
+        <h4><?php echo $this->escapeHtml($title); ?></h4>
     </div>
     <div class="widget-content">
+        
+        <?php
+	    if(!$this->messages == null){
+            echo $this->partial('message.phtml', array(
+                'message' => $this->messages[0],
+                'type' => 'success'
+            ));
+	    }
+	    ?>
+	    
         <table class="data">
             <thead>
                 <tr>
@@ -24,9 +37,9 @@
             <tbody>
             <?php foreach($locations as $location) : ?>
             <?php $actions = '<a class="icon edit" title="Edit" href="' . $this->url(
-	                 'locations', array('action'=>'edit', 'id' => $location->id)) . '"></a>' . 
+	                 'inventory/default', array('controller' => 'locations', 'action'=>'edit', 'id' => $location->id)) . '"></a>' . 
 	               '<a class="icon delete" title="Delete" href="' . $this->url(
-	                 'locations', array('action'=>'delete', 'id' => $location->id)) . '"></a>';?>
+	                 'inventory/default', array('controller' => 'locations', 'action'=>'delete', 'id' => $location->id)) . '"></a>';?>
                 <tr>
                     <td><?php echo $this->escapeHtml($location->location_code);?></td>
                     <td><?php echo $this->escapeHtml($location->location_name);?></td>

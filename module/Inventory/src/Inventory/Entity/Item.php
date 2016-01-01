@@ -2,25 +2,18 @@
 
 namespace Inventory\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\Factory as InputFactory;
-use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\InputFilter\InputFilterInterface;
+use Doctrine\ORM\Mapping as ORM,
+    Zend\InputFilter\InputFilter,
+    Zend\InputFilter\Factory as InputFactory;
 
 /**
  * An inventory item.
  *
  * @ORM\Entity
  * @ORM\Table(name="sc_items")
- * @property string $item_code
- * @property string $short_description
- * @property int $id
  */
-class Item extends Entity implements InputFilterAwareInterface
+class Item extends Entity
 {
-	protected $inputFilter;
-
 	/**
 	 * @ORM\Id
 	 * @ORM\Column(type="integer");
@@ -45,36 +38,15 @@ class Item extends Entity implements InputFilterAwareInterface
 	protected $category;
 	
 	/**
-	 * Magic getter to expose protected properties.
-	 *
-	 * @param string $property
-	 * @return mixed
+	 * @ORM\Column(type="integer");
 	 */
-	public function __get($property)
-	{
-		return $this->$property;
-	}
+	protected $stock_qty;
 	
 	/**
-	 * Magic setter to save protected properties.
-	 *
-	 * @param string $property
-	 * @param mixed $value
+	 * @ORM\Column(type="integer") @ORM\Version
+	 * @var unknown_type
 	 */
-	public function __set($property, $value)
-	{
-		$this->$property = $value;
-	}
-	
-	/**
-	 * Convert the object to an array.
-	 *
-	 * @return array
-	 */
-	public function getArrayCopy()
-	{
-		return get_object_vars($this);
-	}
+	protected $version;
 	
 	/**
 	 * Populate from an array.
@@ -88,18 +60,14 @@ class Item extends Entity implements InputFilterAwareInterface
 		$this->short_description = $data['short_description'];
 	}
 	
-	public function setInputFilter(InputFilterInterface $inputFilter)
-	{
-		throw new \Exception("Not used");
-	}
-	
 	public function getInputFilter()
 	{
-		if (!$this->inputFilter) {
+		if (!$this->inputFilter)
+		{
 			$inputFilter = new InputFilter();
-	
 			$factory = new InputFactory();
 	
+			// Id filter.
 			$inputFilter->add($factory->createInput(array(
 					'name' => 'id',
 					'required' => true,
@@ -108,7 +76,7 @@ class Item extends Entity implements InputFilterAwareInterface
 					),
 			)));
 	
-			// Item Code.
+			// Item Code filter.
 			$inputFilter->add($factory->createInput(array(
 					'name' => 'item_code',
 					'required' => true,
@@ -129,6 +97,7 @@ class Item extends Entity implements InputFilterAwareInterface
 					),
 			)));
 	
+			// Short Description filter.
 			$inputFilter->add($factory->createInput(array(
 				'name' => 'short_description',
 				'required' => true,

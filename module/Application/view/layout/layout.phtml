@@ -4,11 +4,10 @@ $this->headTitle()->setSeparator(' - ')
 $basePath = $this->basePath();
 
 // Stylesheets
-$this->headLink()->appendStylesheet($basePath . '/css/base.css')
-                 ->appendStylesheet($basePath . '/css/layout.css')
-                 ->appendStylesheet($basePath . '/css/skeleton.css')
-                 ->appendStylesheet($basePath . '/css/data.css')
-                 ->appendStylesheet($basePath . '/css/platinum-menu.css');
+$this->headLink()->appendStylesheet($basePath . '/css/bootstrap.min.css')
+                 ->appendStylesheet($basePath . '/css/style.css')
+                 ->appendStylesheet($basePath . '/css/bootstrap-responsive.min.css')
+                 ->appendStylesheet($basePath . '/css/data.css');
 
 // Favicon
 $this->headLink(array(
@@ -29,10 +28,11 @@ echo $this->doctype();
 ?>
 
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <?php echo $this->headTitle('Platinum Application') ?>
 
+    <!--  Meta data -->
     <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
     <!-- Styles -->
@@ -41,52 +41,36 @@ echo $this->doctype();
     <!-- Scripts -->
     <?php echo $this->headScript() ?>
 
-  </head>
+</head>
 
-  <body>
-  <div class="fixed">
-    <div class="container">
-      <a class="brand">Platinum</a>
-      <ul class="platinum-menu">
-        <li>Inventory
-          <ul>
-            <li><a href="#">Inventory Location Transfers</a></li>
-            <li><a href="#">Inventory Stock Adjustments</a></li>
-            <li><a href="#">Item Status</a></li>
-            <li><a href="#">Movements</a></li>
-            <li><a href="#">Valuation Report</a></li>
-            <li><a href="#">Stock check sheets</a></li>
-            <li><a href="#">Items</a></li>
-            <li><a href="#">Item Categories</a><li>
-            <li><a href="#">Inventory Locations</a></li>
-          </ul>  
-        </li>
-        <li>Sales
-          <ul>
-            <li><a href="#">Sales Order Entry</a></li>
-            <li><a href="#">Sales Order Dispatch</a></li>
-            <li><a href="#">Customer Accounts</a></li>
-            <li><a href="#">Invoice</a></li>
-          </ul>
-        </li>
-        <li>Purchasing
-          <ul>
-            <li><a href="#">Purchase Order Entry</a></li>
-            <li><a href="#">Goods Receipt</a></li>
-            <li><a href="#">Supplier Accounts</a></li>
-            <li><a href="#">Remitance</a></li>
-          </ul>
-        </li>
-      </ul>
+<body>
+  
+    <!-- Header -->
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="<?php echo $this->url('default') ?>">Platinum Application</a>
+          <div class="nav-collapse">
+              <?php  echo $this->navigation('Navigation')->menu()->setUlClass('nav'); ?>
+               
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
     </div>
-  </div>  
-    <div id="content" class="container">
+  
+  <!-- Content -->
+  <div class="container">
+       
       <?php echo $this->content; ?>
-    </div> <!-- /container -->
-    
-    <div id="footer">
-        <p>&copy; 2012 by Civray Software. All rights reserved.</p>
-    </div>
+  
+      <hr>
+      <p>&copy; 2012 by Civray Software. All rights reserved.</p>
+  </div>
 
-  </body>
+</body>
 </html>

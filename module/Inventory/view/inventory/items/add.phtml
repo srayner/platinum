@@ -2,40 +2,20 @@
 $title = 'Add new inventory item';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
 <div class="widget">
+	
 	<div class="widget-header">
-	    <h3>Item Properties</h3>
+	    <h4>Item Properties</h4>
 	</div>
 	
 	<div class="widget-content">
-<?php
-$form = $this->form;
-$form->setAttribute('action', $this->url('items', array('action' => 'add')));
-$form->get('submit')->setAttribute('Value', 'Add');
-$form->prepare();
-echo $this->form()->openTag($form);
-echo $this->formHidden($form->get('id'));
-?>
-
-<div class="field"><?php
-echo $this->formLabel($form->get('item_code'));
-echo $this->formInput($form->get('item_code'));
-?></div>
-
-<div class="field"><?php
-echo $this->formLabel($form->get('short_description'));
-echo $this->formInput($form->get('short_description'));
-?></div>
-
-<div class="field"><?php
-echo $this->formLabel($form->get('category_id'));
-echo $this->formSelect($form->get('category_id'));
-?></div>
-
-<?php 
-echo $this->formInput($form->get('submit'));
-echo $this->form()->closeTag($form);
-?>
+		<?php
+		$form = $this->form;
+		$form->setAttribute('action', $this->url('inventory/default', array('controller' => 'items', 'action' => 'add')));
+		$form->get('submit')->setAttribute('Value', 'Add');
+		echo $this->RenderForm($form);
+		?>
     </div>
+    
 </div>

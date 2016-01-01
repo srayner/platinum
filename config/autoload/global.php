@@ -12,5 +12,31 @@
  */
 
 return array(
-    // ...
+    // All navigation-related configuration is collected in the 'navigation' key
+    'navigation' => array(
+        // The DefaultNavigationFactory we configured in (1) uses 'default' as the sitemap key
+        'default' => array(
+            // And finally, here is where we define our page hierarchy
+            array(
+                'label' => 'Home',
+                'route' => 'default',
+                'controller' => 'index'
+            ),
+            array(
+        		'label' => 'Inventory',
+        		'route' => 'inventory',
+                'controller' => 'index'
+        	),
+        	array(
+        		'label' => 'Sales',
+        		'route' => 'roles',
+        		'controller' => 'roles'
+        	),	
+        	array(
+        		'label' => 'Purchasing',
+        		'route' => 'users',
+        		'controller' => 'users'
+        	),
+        ),
+    ),
 );

@@ -1,0 +1,6 @@
+$(function(){
+	
+	oTable = $('.data').dataTable({
+	});
+
+});

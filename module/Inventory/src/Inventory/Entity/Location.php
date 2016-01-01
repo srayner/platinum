@@ -2,11 +2,9 @@
 
 namespace Inventory\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\Factory as InputFactory;
-use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\InputFilter\InputFilterInterface;
+use Doctrine\ORM\Mapping as ORM,
+    Zend\InputFilter\InputFilter,
+    Zend\InputFilter\Factory as InputFactory;
 
 /**
  * An inventory location.
@@ -21,10 +19,8 @@ use Zend\InputFilter\InputFilterInterface;
  * @property string $fax
  * @property string $email
  */
-class Location implements InputFilterAwareInterface
+class Location extends Entity
 {
-	protected $inputFilter;
-
 	/**
 	 * @ORM\Id
 	 * @ORM\Column(type="integer");
@@ -63,38 +59,6 @@ class Location implements InputFilterAwareInterface
 	protected $email;
 	
 	/**
-	 * Magic getter to expose protected properties.
-	 *
-	 * @param string $property
-	 * @return mixed
-	 */
-	public function __get($property)
-	{
-		return $this->$property;
-	}
-	
-	/**
-	 * Magic setter to save protected properties.
-	 *
-	 * @param string $property
-	 * @param mixed $value
-	 */
-	public function __set($property, $value)
-	{
-		$this->$property = $value;
-	}
-	
-	/**
-	 * Convert the object to an array.
-	 *
-	 * @return array
-	 */
-	public function getArrayCopy()
-	{
-		return get_object_vars($this);
-	}
-	
-	/**
 	 * Populate from an array.
 	 *
 	 * @param array $data
@@ -105,23 +69,19 @@ class Location implements InputFilterAwareInterface
 		$this->location_code = $data['location_code'];
 		$this->location_name = $data['location_name'];
 		$this->contact_name = $data['contact_name'];
-		$this->phone_no = $data['phone_no'];
-		$this->fax_no = $data['fax_no'];
+		$this->phone = $data['phone'];
+		$this->fax = $data['fax'];
 		$this->email = $data['email'];
-	}
-	
-	public function setInputFilter(InputFilterInterface $inputFilter)
-	{
-		throw new \Exception("Not used");
 	}
 	
 	public function getInputFilter()
 	{
-		if (!$this->inputFilter) {
+		if (!$this->inputFilter)
+		{
 			$inputFilter = new InputFilter();
-	
 			$factory = new InputFactory();
 	
+			// Id input filter.
 			$inputFilter->add($factory->createInput(array(
 					'name' => 'id',
 					'required' => true,
@@ -130,6 +90,7 @@ class Location implements InputFilterAwareInterface
 					),
 			)));
 	
+			// Location code input filter.
 			$inputFilter->add($factory->createInput(array(
 					'name' => 'location_code',
 					'required' => true,
@@ -149,6 +110,7 @@ class Location implements InputFilterAwareInterface
 					),
 			)));
 	
+			// Location name input filter.
 			$inputFilter->add($factory->createInput(array(
 				'name' => 'location_name',
 				'required' => true,
@@ -168,8 +130,10 @@ class Location implements InputFilterAwareInterface
 				),
 			)));
 			
+			// Contact name input filter.
 			$inputFilter->add($factory->createInput(array(
 				'name' => 'contact_name',
+			    'required' => false,
 				'filters' => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -184,6 +148,63 @@ class Location implements InputFilterAwareInterface
 						),
 					),
 				),
+			)));
+			
+			// Phone input filter.
+			$inputFilter->add($factory->createInput(array(
+			    'name' => 'phone',
+			    'required' => false,
+			    'filters' => array(
+			        array('name' => 'StripTags'),
+			        array('name' => 'StringTrim'),
+			    ),
+			    'validators' => array(
+			        array(
+			            'name' => 'StringLength',
+			            'options' => array(
+			                'encoding' => 'UTF-8',
+			                'min' => 0,
+			                'max' => 64,
+			            ),
+			        ),
+			    ),
+			)));
+			
+			// fax input filter
+			$inputFilter->add($factory->createInput(array(
+			    'name' => 'fax',
+			    'required' => false,
+			    'filters' => array(
+			        array('name' => 'StripTags'),
+			        array('name' => 'StringTrim'),
+			    ),
+			    'validators' => array(
+			        array(
+			            'name' => 'StringLength',
+			            'options' => array(
+			                'encoding' => 'UTF-8',
+			                'min' => 0,
+			                'max' => 64,
+			            ),
+			        ),
+			    ),
+			)));
+			
+			// email input filter.
+			$inputFilter->add($factory->createInput(array(
+			    'name' => 'email',
+			    'required' => false,
+			    'filters' => array(
+			        array('name' => 'StripTags'),
+			            array('name' => 'StringTrim'),
+			        ),
+			        'validators' => array(
+			            array(
+			                'name' => 'EmailAddress',
+			                'options' => array(
+			            ),
+			        ),
+			    ),
 			)));
 	
 			$this->inputFilter = $inputFilter;

@@ -1,0 +1,15 @@
+<?php
+    $title = 'Calendar';
+    $this->headTitle($title);
+    $this->headLink()->appendStylesheet('/css/fullcalendar.css');
+    $this->headScript()->appendFile('/js/fullcalendar.js', 'text/javascript');
+    $this->headScript()->appendFile('/js/jquery-ui-1.9.2.interactions.min.js', 'text/javascript');
+    $this->headScript()->appendFile('/js/application/calendar/index.js', 'text/javascript');
+?>
+
+<h3>Calendar</h3>
+<p><a href="<?php echo $this->url('calendar', array(
+    'controller' => 'calendar',
+    'action'=>'add'
+));?>">Add new calendar event</a></p>
+<div id='calendar'></div>

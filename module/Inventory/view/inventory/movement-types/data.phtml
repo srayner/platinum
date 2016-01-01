@@ -1,0 +1,24 @@
+<?php
+
+// Output
+$output = array(
+    "sEcho" => intval($_GET['sEcho']),
+    "iTotalRecords" => $iTotalRecords,
+    "iTotalDisplayRecords" => $iTotalDisplayRecords,
+    "aaData" => array()
+);
+
+foreach($types as $type)
+{
+    $actions = '<a class="icon edit" title="Edit" href="' . $this->url(
+            'inventory/default', array('controller' => 'movementtypes', 'action'=>'edit', 'id' => $type->id)) . '"></a>' .
+            '<a class="icon delete" title="Delete" href="' . $this->url(
+                    'inventory/default', array('controller' => 'movementtypes', 'action'=>'delete', 'id' => $type->id)) . '"></a>';
+     
+    $row = array();
+    $row[] = $this->escapeHtml($type->code);
+    $row[] = $this->escapeHtml($type->name);
+    $row[] = $actions;
+    $output['aaData'][] = $row;
+}
+echo json_encode($output);

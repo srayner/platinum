@@ -1,0 +1,25 @@
+<?php
+$title = 'Edit movement type';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
+	
+	<div class="widget-header">
+	    <h4>Location Properties</h4>
+	</div>
+	
+	<div class="widget-content">
+        <?php
+        $form = $this->form;
+        $form->setAttribute('action', $this->url('inventory/default', array(
+            'controller' => 'movementtypes',
+            'action' => 'edit',
+            'id'=>$this->id
+        )));
+        $form->get('submit')->setAttribute('value', 'Edit');
+        echo $this->RenderForm($form);
+        ?>
+    </div>
+    
+</div>

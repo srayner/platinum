@@ -14,7 +14,7 @@ $(function(){
 	oTable = $('.data').dataTable({
 		"sPaginationType": "full_numbers",
 		"bServerSide": true,
-		"sAjaxSource": "/categories/index",
+		"sAjaxSource": "/inventory/categories/index",
 		"aoColumnDefs": [
 		    { "bSortable": false, "aTargets": [ 'no-sort' ] },
 		    { "sWidth": "100px", "aTargets": [ 'actions' ] },

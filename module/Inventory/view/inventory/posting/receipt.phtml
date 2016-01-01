@@ -1,0 +1,24 @@
+<?php
+    $title = 'Receipt goods in';
+    $this->headTitle($title);
+    $this->headScript()->appendFile('/js/bootstrap.js', 'text/javascript');
+    $this->headScript()->appendFile('/js/bootstrap-typeahead.js', 'text/javascript');
+    $this->headScript()->appendFile('/js/inventory/posting/receipt.js', 'text/javascript');
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
+	
+	<div class="widget-header">
+	    <h4>Receipt Details</h4>
+	</div>
+	
+	<div class="widget-content">
+		<?php
+		$form = $this->form;
+		$form->setAttribute('action', $this->url('inventory/default', array('controller' => 'posting', 'action' => 'receipt')));
+		$form->get('submit')->setAttribute('Value', 'OK');
+		echo $this->RenderForm($form);
+		?>
+    </div>
+    
+</div>

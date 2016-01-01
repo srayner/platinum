@@ -1,0 +1,52 @@
+<?php
+$title = 'Application Roles';
+$this->headTitle($title);
+$this->headScript()->appendFile('/js/jquery.dataTables.min.js', 'text/javascript');
+$this->headScript()->appendFile('/js/application/roles/index.js', 'text/javascript');
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p><a href="<?php echo $this->url('roles', array(
+'action'=>'add'));?>">Add new role</a></p>
+
+<div class="widget">
+	<div class="widget-header">
+	    <h3><?php echo $this->escapeHtml($title); ?></h3>
+	</div>
+	<div class="widget-content">
+	    
+	    <?php
+	    if(!$this->messages == null){
+            echo $this->partial('message.phtml', array('message' => $this->messages[0]));
+	    }
+	    ?>
+	    
+	    <table class="data">
+	        <thead>
+    	        <tr>
+        	        <th>Role Name</th>
+        	        <th>Default</th>
+        	        <th>Parent</th>
+        	        <th class="no-sort actions">Actions</th>
+    	        </tr>
+    	    </thead>
+    	    <tbody>
+    	    
+    	    <?php foreach($roles as $role) : ?>
+    	    <?php $actions = '<a class="icon edit" title="Edit" href="' . $this->url(
+	             'role', array('action'=>'edit', 'id' => $role->getId())) . '"></a>' . 
+	           '<a class="icon delete" title="Delete" href="' . $this->url(
+	             'roles', array('action'=>'delete', 'id' => $role->getId())) . '"></a>';?>
+    	    <tr>
+    	        <td><?php echo $this->escapeHtml($role->getName());?></td>
+    	        <td><?php echo $this->escapeHtml($role->getDefault());?></td>
+                <td><?php echo $this->escapeHtml($role->getParent());?></td>
+    	        <td><?php echo $actions;?></td>
+    	    </tr>
+            <?php endforeach; ?>
+    	    
+    	    </tbody>
+	    </table>
+	</div>
+</div>
+<div class="hidden" id="total-records"><?php echo $iTotalRecords;?></div>

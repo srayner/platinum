@@ -1,23 +1,28 @@
 <?php
-$title = 'Inventory Items';
-$this->headTitle($title);
-$this->headScript()->appendFile('/js/jquery.dataTables.min.js', 'text/javascript');
-$this->headScript()->appendFile('/js/inventory/items/index.js', 'text/javascript');
+    $title = 'Inventory Items';
+    $this->headTitle($title);
+    $this->headScript()->appendFile('/js/jquery.dataTables.min.js', 'text/javascript');
+    $this->headScript()->appendFile('/js/inventory/items/index.js', 'text/javascript');
 ?>
 
-<h1><?php echo $this->escapeHtml($title); ?></h1>
-<p><a href="<?php echo $this->url('items', array(
-'action'=>'add'));?>">Add new inventory item</a></p>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<p><a href="<?php echo $this->url('inventory/default', array(
+    'controller' => 'items',
+    'action'=>'add'
+));?>">Add new inventory item</a></p>
 
 <div class="widget">
 	<div class="widget-header">
-	    <h3><?php echo $this->escapeHtml($title); ?></h3>
+	    <h4><?php echo $this->escapeHtml($title); ?></h4>
 	</div>
 	<div class="widget-content">
 	    
 	    <?php
 	    if(!$this->messages == null){
-            echo $this->partial('message.phtml', array('message' => $this->messages[0]));
+            echo $this->partial('message.phtml', array(
+                'type' => 'success',
+                'message' => $this->messages[0],
+            ));
 	    }
 	    ?>
 	    
@@ -33,9 +38,9 @@ $this->headScript()->appendFile('/js/inventory/items/index.js', 'text/javascript
     	    
     	    <?php foreach($items as $item) : ?>
     	    <?php $actions = '<a class="icon edit" title="Edit" href="' . $this->url(
-	             'items', array('action'=>'edit', 'id' => $item->id)) . '"></a>' . 
+	             'inventory/default', array('controller' => 'items', 'action'=>'edit', 'id' => $item->id)) . '"></a>' . 
 	           '<a class="icon delete" title="Delete" href="' . $this->url(
-	             'items', array('action'=>'delete', 'id' => $item->id)) . '"></a>';?>
+	             'inventory/default', array('controller' => 'items', 'action'=>'delete', 'id' => $item->id)) . '"></a>';?>
     	    <tr>
     	        <td><?php echo $this->escapeHtml($item->item_code);?></td>
                 <td><?php echo $this->escapeHtml($item->short_description);?></td>

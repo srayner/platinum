@@ -7,8 +7,16 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
+    // The main home page.
+	public function indexAction()
     {
         return new ViewModel();
+    }
+    
+    // The system menu page.
+    public function systemIndexAction()
+    {
+        
+    	return new ViewModel();
     }
 }

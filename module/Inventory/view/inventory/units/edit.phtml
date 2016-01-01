@@ -1,0 +1,21 @@
+<?php
+$title = 'Edit unit of measure';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
+	
+	<div class="widget-header">
+	    <h4>Unit properties</h4>
+	</div>
+	
+	<div class="widget-content">
+        <?php
+        $form = $this->form;
+        $form->setAttribute('action', $this->url('inventory/default', array('controller' => 'units', 'action' => 'edit', 'id'=>$this->id)));
+        $form->get('submit')->setAttribute('value', 'Edit');
+        echo $this->RenderForm($form);
+        ?>
+    </div>
+    
+</div>

@@ -1,1 +1,25 @@
 <?php
+$title = 'Delete inventory location';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
+
+    <div class="widget-header">
+	    <h4>Delete inventory location</h4>
+	</div>
+	
+	<div class="widget-content">
+	
+        <p>Are you sure that you want to delete location
+        '<?php echo $this->escapeHtml($location['location_code']); ?>'?
+        </p>
+        <?php
+        $form = $this->form;
+        $form->setAttribute('action', $this->url('inventory/default', array('controller' => 'locations', 'action' => 'delete', 'id'=>$this->id)));
+        echo $this->RenderForm($form);
+        $url = $this->url('inventory/default', array('controller' => 'locations', 'action' => 'delete', 'id'=>$this->id)); ?>
+    
+    </div>
+
+</div>

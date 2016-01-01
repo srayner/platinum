@@ -2,11 +2,9 @@
 
 namespace Inventory\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\Factory as InputFactory;
-use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\InputFilter\InputFilterInterface;
+use Doctrine\ORM\Mapping as ORM,
+    Zend\InputFilter\InputFilter,
+    Zend\InputFilter\Factory as InputFactory;
 
 /**
  * An inventory item category.
@@ -16,10 +14,8 @@ use Zend\InputFilter\InputFilterInterface;
  * @property string $name
  * @property int $id
  */
-class Category extends Entity implements InputFilterAwareInterface
-{
-	protected $inputFilter;
-	
+class Category extends Entity
+{	
 	/**
 	 * @ORM\Id
 	 * @ORM\Column(type="integer");
@@ -35,39 +31,6 @@ class Category extends Entity implements InputFilterAwareInterface
 	protected $name;
 	
 	/**
-	 * Magic getter to expose protected properties.
-	 *
-	 * @param string $property
-	 * @return mixed
-	 */
-	public function __get($property)
-	{
-		return $this->$property;
-	}
-	
-	/**
-	 * Magic setter to save protected properties.
-	 *
-	 * @param string $property
-	 * @param mixed $value
-	 */
-	public function __set($property, $value)
-	{
-		$this->$property = $value;
-	}
-	
-	
-	/**
-	 * Convert the object to an array.
-	 *
-	 * @return array
-	 */
-	public function getArrayCopy()
-	{
-		return get_object_vars($this);
-	}
-	
-	/**
 	 * Populate from an array.
 	 *
 	 * @param array $data
@@ -78,18 +41,14 @@ class Category extends Entity implements InputFilterAwareInterface
 		$this->name = $data['name'];
 	}
 	
-	public function setInputFilter(InputFilterInterface $inputFilter)
-	{
-		throw new \Exception("Not used");
-	}
-	
 	public function getInputFilter()
 	{
-		if (!$this->inputFilter) {
+		if (!$this->inputFilter)
+		{
 			$inputFilter = new InputFilter();
-	
 			$factory = new InputFactory();
 	
+			// id filter
 			$inputFilter->add($factory->createInput(array(
 					'name' => 'id',
 					'required' => true,
@@ -98,6 +57,7 @@ class Category extends Entity implements InputFilterAwareInterface
 					),
 			)));
 	
+			// name filter
 			$inputFilter->add($factory->createInput(array(
 					'name' => 'name',
 					'required' => true,

@@ -1,0 +1,26 @@
+<?php
+$title = 'Delete movement type';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
+
+    <div class="widget-header">
+	    <h4>Delete movement type</h4>
+	</div>
+	
+	<div class="widget-content">
+	
+        <p>Are you sure that you want to delete
+        '<?php echo $this->escapeHtml($type['code']); ?>',   
+        '<?php echo $this->escapeHtml($type['name']); ?>'?
+        </p>
+        <?php
+        $form = $this->form;
+        $form->setAttribute('action', $this->url('inventory/default', array('controller' => 'movementtypes', 'action' => 'delete', 'id'=>$this->id)));
+        echo $this->RenderForm($form);
+        $url = $this->url('inventory/default', array('controller' => 'movementtypes', 'action' => 'delete', 'id'=>$this->id)); ?>
+    
+    </div>
+
+</div>

@@ -1,0 +1,24 @@
+<?php
+$title = 'Add new inventory movement type';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
+	
+	<div class="widget-header">
+	    <h4>Movement Type Properties</h4>
+	</div>
+
+	<div class="widget-content">
+		<?php
+		$form = $this->form;
+		$form->setAttribute('action', $this->url('inventory/default', array(
+            'controller' => 'movement-types',
+            'action' => 'add'
+        )));
+		$form->get('submit')->setAttribute('Value', 'Add');
+		echo $this->RenderForm($form);
+		?>
+    </div>
+    
+</div>

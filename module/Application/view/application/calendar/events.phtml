@@ -1,0 +1,17 @@
+<?php
+
+// Output
+$output = array();
+
+foreach ($events as $event)
+{
+    $object = array();
+    $object['id'] = $event->id;
+    $object['title'] = $event->title;
+    $object['start'] = $event->start->format('Y-m-d H:i:s'); // 2012-12-05T13:15:00Z
+    $object['end'] = $event->end->format('Y-m-d H:i:s');
+    $object['allDay'] = $event->allday;
+    $output[] = $object;
+}
+
+echo json_encode($output);

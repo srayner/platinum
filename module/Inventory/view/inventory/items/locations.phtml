@@ -1,0 +1,37 @@
+<?php
+    $title = 'Inventory Item Locations';
+    $this->headTitle($title);
+    $this->headScript()->appendFile('/js/jquery.dataTables.min.js', 'text/javascript');
+    $this->headScript()->appendFile('/js/inventory/items/locations.js', 'text/javascript');
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+
+<div class="widget">
+	<div class="widget-header">
+	    <h4><?php echo 'Location(s) of ' . $this->escapeHtml($item->item_code); ?></h4>
+	</div>
+	<div class="widget-content">
+	
+	    <table class="data">
+	        <thead>
+    	        <tr>
+        	        <th>Code</th>
+        	        <th>Location</th>
+        	        <th>Qty</th>
+    	        </tr>
+    	    </thead>
+    	    <tbody>
+    	    
+    	    <?php foreach($locations as $location) : ?>
+    	    <tr>
+    	        <td><?php echo $this->escapeHtml($location['location_code']);?></td>
+                <td><?php echo $this->escapeHtml($location['location_name']);?></td>
+                <td><?php echo $this->escapeHtml($location['1']);?></td>
+    	    </tr>
+            <?php endforeach; ?>
+    	    
+    	    </tbody>
+	    </table>
+	
+	</div>
+</div>

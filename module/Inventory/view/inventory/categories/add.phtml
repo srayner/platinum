@@ -2,23 +2,20 @@
 $title = 'Add new inventory category';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
-<?php
-$form = $this->form;
-$form->setAttribute('action', $this->url('categories', array('action' => 'add')));
-$form->get('submit')->setAttribute('Value', 'Add');
-echo $this->form()->openTag($form);
-?>
-<dl class="zend_form">
-<?php echo $this->formInput($form->get('id')); ?>
-<dt><?php echo $this->formLabel($form->get('name')); ?></dt>
-<dd><?php
-echo $this->formInput($form->get('name'));
-echo $this->formElementErrors($form->get('name'));
-?></dd>
-<dd><?php
-echo $this->formInput($form->get('submit'));
-echo $this->formElementErrors($form->get('submit'));
-?></dd>
-</dl>
-<?php echo $this->form()->closeTag($form); ?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
+	
+	<div class="widget-header">
+	    <h4>Category Properties</h4>
+	</div>
+	
+	<div class="widget-content">
+		<?php
+		$form = $this->form;
+		$form->setAttribute('action', $this->url('inventory/default', array('controller' => 'categories', 'action' => 'add')));
+		$form->get('submit')->setAttribute('Value', 'Add');
+		echo $this->RenderForm($form);
+		?>
+    </div>
+    
+</div>

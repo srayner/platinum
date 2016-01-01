@@ -1,0 +1,52 @@
+<?php
+    $title = 'Units of measure';
+    $this->headTitle($title);
+    $this->headScript()->appendFile('/js/jquery.dataTables.min.js', 'text/javascript');
+    $this->headScript()->appendFile('/js/inventory/units/index.js', 'text/javascript');
+?>
+
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<p><a href="<?php echo $this->url('inventory/default', array(
+    'controller' => 'units',
+    'action'=>'add'
+));?>">Add new unit of measure</a></p>
+
+<div class="widget">
+  <div class="widget-header">
+    <h4><?php echo $this->escapeHtml($title); ?></h4>
+  </div>
+  <div class="widget-content">
+  
+      <?php
+	    if(!$this->messages == null){
+            echo $this->partial('message.phtml', array(
+                'type' => 'success',
+                'message' => $this->messages[0]
+            ));
+	    }
+	  ?>
+	    
+    <table class="data">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th class="no-sort actions">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <?php foreach($units as $unit) : ?>
+            <?php $actions = '<a class="icon edit" title="Edit" href="' . $this->url(
+	                 'inventory/default', array('controller' => 'units', 'action'=>'edit', 'id' => $unit->id)) . '"></a>' . 
+	               '<a class="icon delete" title="Delete" href="' . $this->url(
+	                 'inventory/default', array('controller' => 'unit', 'action'=>'delete', 'id' => $unit->id)) . '"></a>';?>
+            <tr>
+              <td><?php echo $this->escapeHtml($unit->name);?></td>
+              <td><?php echo $actions;?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+  </div>
+</div>
+<div class="hidden" id="total-records"><?php echo $iTotalRecords;?></div>

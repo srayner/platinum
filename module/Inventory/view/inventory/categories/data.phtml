@@ -11,9 +11,9 @@ $output = array(
 foreach($categories as $category)
 {
 	$actions = '<a class="icon edit" title="Edit" href="' . $this->url(
-			'categories', array('action'=>'edit', 'id' => $category->id)) . '"></a>' .
-			'<a class="icon delete" title="Delete" href="' . $this->url(
-					'categories', array('action'=>'delete', 'id' => $category->id)) . '"></a>';
+	        'inventory/default', array('controller' => 'categories', 'action'=>'edit', 'id' => $category->id)) . '"></a>' .
+	    '<a class="icon delete" title="Delete" href="' . $this->url(
+			'inventory/default', array('controller' => 'categories', 'action'=>'delete', 'id' => $category->id)) . '"></a>';
 	 
 	$row = array();
 	$row[] = $this->escapeHtml($category->name);

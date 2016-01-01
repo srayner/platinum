@@ -32,9 +32,10 @@ class CategoryForm extends Form
 		$this->add(array(
 				'name' => 'submit',
 				'attributes' => array(
-						'type' => 'submit',
+						'type' => 'Submit',
 						'value' => 'Go',
 						'id' => 'submitbutton',
+				        'class' => 'btn btn-primary'
 				),
 		));
 

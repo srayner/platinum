@@ -1,0 +1,58 @@
+<h3>Transactions</h3>
+
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller' => 'posting',
+    'action'     =>'receipt'
+));?>">Receipt Goods In</a><br>
+
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller' => 'posting',
+    'action'     =>'transfer'
+));?>">Inventory Location Transfers</a><br>
+
+<a href="<?php echo $this->url('inventory/default', array(
+        'controller' => 'posting',
+        'action'     => 'adjustment'
+));?>">Inventory Adjustments</a><br>
+
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller' => 'posting',
+    'action'     =>'bookout'
+));?>">Book Goods Out</a><br>
+<br>
+
+<h3>Enquiries &amp Reports</h3>
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller' => 'items',
+    'action'=>'enquire'
+));?>">Item Status</a><br>
+
+<a href="<?php echo $this->url('inventory/default', array(
+        'controller'=>'items',
+        'action'=>'movements'
+));?>">Movements</a><br>
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller' => 'items',
+    'action'=>'valuation'
+));?>">Valuation Report</a><br>
+<a>Stock check sheets</a><br><br>
+
+<h3>Maintenance</h3>
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller'=>'items'
+));?>">Items</a><br>
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller'=>'categories'
+));?>">Item Categories</a><br>
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller'=>'locations'
+));?>">Inventory Locations</a><br>
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller'=>'movement-types'
+));?>">Movement Types</a><br>
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller' => 'units'
+));?>">Units of Measure</a><br>
+<a href="<?php echo $this->url('inventory/default', array(
+    'controller' => 'sales-pricing'
+));?>">Sales Pricing</a><br>

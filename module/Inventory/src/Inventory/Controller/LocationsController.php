@@ -4,30 +4,13 @@ namespace Inventory\Controller;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     Inventory\Form\LocationForm,
+    Inventory\Form\ConfirmationForm,
     Doctrine\ORM\EntityManager,
     Doctrine\ORM\Query,
     Inventory\Entity\Location;
 
-class LocationsController extends AbstractActionController
-{
-	/**
-	 * @var Doctrine\ORM\EntityManager
-	 */
-	protected $em;
-	
-	public function setEntityManager(EntityManager $em)
-	{
-		$this->em = $em;
-	}
-	
-	public function getEntityManager()
-	{
-		if (null === $this->em) {
-			$this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-		}
-		return $this->em;
-	}
-	
+class LocationsController extends AbstractInventoryController
+{	
 	public function indexAction()
 	{
 		$aColumns = array('l.location_code', 'l.location_name');
@@ -102,23 +85,26 @@ class LocationsController extends AbstractActionController
 	
 		// Check if the request is a POST
 		$request = $this->getRequest();
-		if ($request->isPost()) {
-			
+		if ($request->isPost())
+		{	
 			// Create a new Location intance.
 			$location = new Location();
 	
 			// Pull the validator from entity and check form is valid.
 			$form->setInputFilter($location->getInputFilter());
 			$form->setData($request->getPost());
-			if ($form->isValid()) {
-				
+			if ($form->isValid())
+			{	
 				// Populate the item object and persist it to the database.
 				$location->populate($form->getData());
 				$this->getEntityManager()->persist($location);
 				$this->getEntityManager()->flush();
 	
+				// Create information message.
+				$this->flashMessenger()->addMessage('Location ' . $location->location_code . ' sucesfully added');
+				
 				// Redirect to list of locations
-				return $this->redirect()->toRoute('locations');
+				return $this->redirect()->toRoute('inventory/default', array('controller' => 'locations'));
 			}
 		}
 	
@@ -128,29 +114,39 @@ class LocationsController extends AbstractActionController
 	
 	public function editAction()
 	{
+	    // Get a current copy of the entity.
 		$id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
 		if (!$id) {
-			return $this->redirect()->toRoute('locations', array('action'=>'add'));
+			return $this->redirect()->toRoute('invntory/default', array('controller' => 'locations', 'action'=>'add'));
 		}
 		$location = $this->getEntityManager()->find('Inventory\Entity\Location', $id);
 	
+		// Create a new form instance and bind the entity to it.
 		$form = new LocationForm();
-		$form->setBindOnValidate(false);
 		$form->bind($location);
 		$form->get('submit')->setAttribute('label', 'Edit');
 	
+		// Check if this request is a POST.
 		$request = $this->getRequest();
-		if ($request->isPost()) {
-			$form->setData($request->getPost());
-			if ($form->isValid()) {
-				$form->bindValues();
+		if ($request->isPost())
+		{
+			// Validate the data.
+		    $form->setData($request->getPost());
+			if ($form->isValid())
+			{
+				// Persist changes to the database.
+			    $this->getEntityManager()->persist($location);
 				$this->getEntityManager()->flush();
 	
+				// Create information message.
+				$this->flashMessenger()->addMessage('Location ' . $location->location_code . ' successfully updated');
+				
 				// Redirect to list of locations
-				return $this->redirect()->toRoute('locations');
+				return $this->redirect()->toRoute('inventory/default', array('controller' => 'locations'));
 			}
 		}
 	
+		// Render (or re-render) then form.
 		return array(
 				'id' => $id,
 				'form' => $form,
@@ -161,31 +157,41 @@ class LocationsController extends AbstractActionController
 	{
 		$id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
 		if (!$id) {
-			return $this->redirect()->toRoute('locations');
+			return $this->redirect()->toRoute('inventory/default', array('controller' => 'locations'));
 		}
 	
+		// Create a new form instance.
+		$form = new ConfirmationForm();
+		
 		$request = $this->getRequest();
 		if ($request->isPost()) {
-			$del = $request->getPost()->get('del', 'No');
+			$del = $request->getPost()->get('yes', 'No');
 			if ($del == 'Yes') {
 				$id = (int)$request->getPost()->get('id');
 				$location = $this->getEntityManager()->find('Inventory\Entity\Location', $id);
-				if ($location) {
-					$this->getEntityManager()->remove($item);
+				if ($location)
+				{    
+				    // Delete from the database.
+					$this->getEntityManager()->remove($location);
 					$this->getEntityManager()->flush();
+					
+					// Create information message.
+					$this->flashMessenger()->addMessage('Location ' . $location->location_code . ' sucesfully deleted');
 				}
 			}
 	
 			// Redirect to list of locations
-			return $this->redirect()->toRoute('default', array(
+			return $this->redirect()->toRoute('inventory/default', array(
 					'controller' => 'locations',
 					'action' => 'index',
 			));
 		}
 	
+		$form->populateValues(array('id' => $id));
 		return array(
 				'id' => $id,
-				'item' => $this->getEntityManager()->find('Inventory\Entity\Location', $id)->getArrayCopy()
+				'location' => $this->getEntityManager()->find('Inventory\Entity\Location', $id)->toArray(),
+		        'form' => $form
 		);
 	}
 	

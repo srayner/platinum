@@ -1,0 +1,21 @@
+<?php 
+
+// Output
+$output = array(
+    "sEcho" => intval($_GET['sEcho']),
+    "iTotalRecords" => $iTotalRecords,
+    "iTotalDisplayRecords" => $iTotalDisplayRecords,
+    "aaData" => array()
+);
+
+foreach($transactions as $transaction)
+{	    		
+	$row = array();
+	$row[] = $transaction->trans_date->format('Y-m-d H:i:s');
+	$row[] = $this->escapeHtml($transaction->item->item_code);
+	$row[] = $this->escapeHtml($transaction->movement_type->name);
+	$row[] = $transaction->qty;
+	$row[] = $this->escapeHtml($transaction->location->location_name);
+	$output['aaData'][] = $row;
+}
+echo json_encode($output);

@@ -4,9 +4,9 @@ return array(
         'Application',
     	'DoctrineModule',
     	'DoctrineORMModule',
-    	'ZfcBase',
-    	'ZfcUser',
-    	'ZfcUserDoctrineORM',
+    //	'ZfcBase',
+    //	'ZfcUser',
+    //	'ZfcUserDoctrineORM',
     	'Inventory'
     ),
     'module_listener_options' => array( 
@@ -23,6 +23,7 @@ return array(
     'service_manager' => array(
         'use_defaults' => true,
         'factories'    => array(
+        	'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
         ),
     ),
 );

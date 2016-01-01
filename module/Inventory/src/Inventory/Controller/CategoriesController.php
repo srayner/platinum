@@ -4,30 +4,13 @@ namespace Inventory\Controller;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     Inventory\Form\CategoryForm,
+    Inventory\Form\ConfirmationForm,
     Doctrine\ORM\EntityManager,
     Doctrine\ORM\Query,
     Inventory\Entity\Category;
 
-class CategoriesController extends AbstractActionController
+class CategoriesController extends AbstractInventoryController
 {
-	/**
-	 * @var Doctrine\ORM\EntityManager
-	 */
-	protected $em;
-
-	public function setEntityManager(EntityManager $em)
-	{
-		$this->em = $em;
-	}
-
-	public function getEntityManager()
-	{
-		if (null === $this->em) {
-			$this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-		}
-		return $this->em;
-	}
-
 	public function indexAction()
 	{
 		$aColumns = array('c.name');
@@ -36,7 +19,7 @@ class CategoriesController extends AbstractActionController
 		$sEcho          = $this->params()->fromQuery('sEcho');
 		$iDisplayStart  = $this->params()->fromQuery('iDisplayStart', 0);
 		$iDisplayLength = $this->params()->fromQuery('iDisplayLength', 10);
-		$iSortingCols   = $this->params()->fromQuery('iSortingCols', 0);
+		$iSortingCols   = $this->params()->fromQuery('iSortingCols', 1);
 		$iSortIndex     = $this->params()->fromQuery('iSortCol_0', 0);
 		$sSortDir       = $this->params()->fromQuery('sSortDir_0', 'asc');
 		$sSearch        = $this->params()->fromQuery('sSearch', '');
@@ -62,7 +45,7 @@ class CategoriesController extends AbstractActionController
 			$orderBy = 'ORDER BY ' . $aColumns[$iSortIndex] . ' ' . strtoupper($sSortDir) . ' ';
 		}
 		
-		// build query
+		// Build query.
 		$dql = 'SELECT c ' . $from . $where  . $orderBy;
 		$query = $this->getEntityManager()->createQuery($dql);
 		$query->setFirstResult($iDisplayStart);
@@ -115,8 +98,11 @@ class CategoriesController extends AbstractActionController
 				$this->getEntityManager()->persist($category);
 				$this->getEntityManager()->flush();
 
-				// Redirect to list of albums
-				return $this->redirect()->toRoute('categories');
+				// Create information message.
+				$this->flashMessenger()->addMessage('Category ' . $category->name . ' sucesfully added');
+				
+				// Redirect to list of categories
+				return $this->redirect()->toRoute('inventory/default', array('controller' => 'categories'));
 			}
 		}
 
@@ -126,38 +112,39 @@ class CategoriesController extends AbstractActionController
 
 	public function editAction()
 	{
-		
 		// Get a current copy of the entity.
 		$id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
 		if (!$id) {
-			return $this->redirect()->toRoute('categories', array('action'=>'add'));
+			return $this->redirect()->toRoute('inventory/default', array('controller' => 'categories', 'action'=>'add'));
 		}
 		$category = $this->getEntityManager()->find('Inventory\Entity\Category', $id);
 
-		// Create a new form instance.
+		// Create a new form instance and bind the entity to it.
 		$form = new CategoryForm();
+		$form->bind($category);
+		$form->get('submit')->setAttribute('label', 'Edit');
 		
 		// Check if this request is a POST.
 		$request = $this->getRequest();
 		if ($request->isPost())
 		{	
-			// Pull the validator from the entity, populate the form and check it's valid.
-			$form->setInputFilter($category->getInputFilter());
+		    // Validate the data.
 			$form->setData($request->getPost());
 			if ($form->isValid())
 			{
-				// Populate the entity with values from the form, and persist cahanges.
-				$category->populate($form->getData());
+				// Persist changes.
 				$this->getEntityManager()->persist($category);
 				$this->getEntityManager()->flush();
 
+				// Create information message.
+				$this->flashMessenger()->addMessage('Category ' . $category->name . ' sucesfully updated');
+				
 				// Redirect to list of categories
-				return $this->redirect()->toRoute('categories');
+				return $this->redirect()->toRoute('inventory/default', array('controller' => 'categories'));
 			}
 		}
-
-		// If request is GET then render the form with current values from entity.
-		$form->populateValues($category->toArray());
+		
+		// Render (or re-render) the form.
 		return array(
 				'id' => $id,
 				'form' => $form,
@@ -168,31 +155,41 @@ class CategoriesController extends AbstractActionController
 	{
 		$id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
 		if (!$id) {
-			return $this->redirect()->toRoute('categories');
+			return $this->redirect()->toRoute('inventory/default', array('controller' => 'categories'));
 		}
+		
+		// Create a new form instance.
+		$form = new ConfirmationForm();
 
 		$request = $this->getRequest();
 		if ($request->isPost()) {
-			$del = $request->getPost()->get('del', 'No');
+			$del = $request->getPost()->get('yes', 'No');
 			if ($del == 'Yes') {
 				$id = (int)$request->getPost()->get('id');
 				$category = $this->getEntityManager()->find('Inventory\Entity\Category', $id);
 				if ($category) {
-					$this->getEntityManager()->remove($category);
+					
+				    // Delete from the database.
+				    $this->getEntityManager()->remove($category);
 					$this->getEntityManager()->flush();
+					
+					// Create information message.
+					$this->flashMessenger()->addMessage('Category ' . $category->name . ' sucesfully deleted');
 				}
 			}
 
 			// Redirect to list of categories
-			return $this->redirect()->toRoute('default', array(
+			return $this->redirect()->toRoute('inventory/default', array(
 					'controller' => 'categories',
 					'action' => 'index',
 			));
 		}
 
+		$form->populateValues(array('id' => $id));
 		return array(
 				'id' => $id,
-				'category' => $this->getEntityManager()->find('Inventory\Entity\Category', $id)->getArrayCopy()
+				'category' => $this->getEntityManager()->find('Inventory\Entity\Category', $id)->getArrayCopy(),
+		        'form' => $form
 		);
 	}
 

@@ -4,78 +4,48 @@ namespace Inventory;
 return array(
     'router' => array(
 		'routes' => array(
-			
-			'items' => array(
-				'type' => 'segment',
-				'options' => array(
-					'route' => '/items[/:action][/:id]',
-					'constraints' => array(
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id' => '[0-9]+',
-					),
-					'defaults' => array(
-						'controller' => 'inventory/items',
-						'action' => 'index',
-					),
-				),
-			),
-				
-			'categories' => array(
-				'type' => 'segment',
-				'options' => array(
-					'route' => '/categories[/:action][/:id]',
-					'constraints' => array(
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id' => '[0-9]+',
-					),
-					'defaults' => array(
-						'controller' => 'inventory/categories',
-						'action' => 'index',
-					),
-				),
-			),
-				
-			'locations' => array(
-				'type' => 'segment',
-					'options' => array(
-					'route' => '/locations[/:action][/:id]',
-					'constraints' => array(
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id' => '[0-9]+',
-					),
-					'defaults' => array(
-						'controller' => 'inventory/locations',
-						'action' => 'index',
-					),
-				),
-			),
-				
-			'products' => array(
-				'type' => 'segment',
-				'options' => array(
-					'route' => '/products[/:action][/:id]',
-					'constraints' => array(
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id' => '[0-9]+',
-					),
-					'defaults' => array(
-						'controller' => 'inventory/products',
-						'action' => 'index',
-					),
-				),
-			),
-				
+		    'inventory' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/inventory',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Inventory\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:controller[/:action][/:id]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                    
+                            ),
+                        ),
+                    ),
+                ),
+            ),
 		),
-	),
+    ), 
 	'controllers' => array(
 		'invokables' => array(
-			'inventory/items' => 'Inventory\Controller\ItemsController',
-			'inventory/categories' => 'Inventory\Controller\CategoriesController',
-			'inventory/locations' => 'Inventory\Controller\LocationsController',
-			'inventory/products' => 'Inventory\Controller\ProductsController'
+		    'Inventory\Controller\Index'          => 'Inventory\Controller\IndexController',    
+			'Inventory\Controller\Items'          => 'Inventory\Controller\ItemsController',
+			'Inventory\Controller\Categories'     => 'Inventory\Controller\CategoriesController',
+			'Inventory\Controller\Locations'      => 'Inventory\Controller\LocationsController',
+			'Inventory\Controller\movement-types' => 'Inventory\Controller\MovementTypesController',
+		    'Inventory\Controller\Units'          => 'Inventory\Controller\UnitsController',
+		    'Inventory\Controller\Posting'        => 'Inventory\Controller\PostingController',
 		),
 	),
 	'view_manager' => array(
+	    'template_map' => include __DIR__  .'/../template_map.php',
 		'template_path_stack' => array(
 			__DIR__ . '/../view',
 		),

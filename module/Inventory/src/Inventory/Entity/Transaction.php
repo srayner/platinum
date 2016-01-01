@@ -1,14 +1,12 @@
 <?php
 namespace Inventory\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\Factory as InputFactory;
-use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\InputFilter\InputFilterInterface;
+use Doctrine\ORM\Mapping as ORM,
+    Zend\InputFilter\InputFilter,
+    Zend\InputFilter\Factory as InputFactory;
 
 /**
- * A Stock Stransaction
+ * A stock transaction
  * @author Steve
  * 
  * @ORM\Entity
@@ -16,8 +14,6 @@ use Zend\InputFilter\InputFilterInterface;
  */
 class Transaction extends Entity
 {
-	protected $inputFilter;
-
 	/**
 	 * @ORM\Id
 	 * @ORM\Column(type="integer");
@@ -39,18 +35,25 @@ class Transaction extends Entity
 	protected $trans_date;
 	
 	/**
-	 * @ORM\ManyToOne(targetEntity="TransType")
-     * @ORM\JoinColumn(name="trans_type_id", referencedColumnName="id")
+	 * @ORM\ManyToOne(targetEntity="MovementType")
+     * @ORM\JoinColumn(name="movement_type_id", referencedColumnName="id", nullable=false)
 	 * @var integer
 	 */
-	protected $trans_type_id;
+	protected $movement_type;
 	
 	/**
 	 * @ORM\ManyToOne(targetEntity="Location")
-	 * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="location_id", referencedColumnName="id", nullable=false)
 	 * @var integer
 	 */
-	protected $location_id;
+	protected $location;
+	
+	/**
+	 * @ORM\ManyToOne(targetEntity="Item")
+	 * @ORM\JoinColumn(name="item_id", referencedColumnName="id", nullable=false)
+	 * @var integer
+	 */
+	protected $item;
 	
 	/**
 	 * @ORM\Column(type="integer")
@@ -59,9 +62,88 @@ class Transaction extends Entity
 	protected $qty;
 	
 	/**
-	 * @ORM\Column(type="string", length=128)
+	 * @ORM\Column(type="string", length=64, nullable=true)
 	 * @var unknown_type
 	 */
 	protected $narrative;
 	
+	/**
+	 * Constructor
+	 * @param unknown_type $type
+	 * @param unknown_type $item
+	 * @param unknown_type $location
+	 * @param unknown_type $qty
+	 */
+	public function __construct($type, $item, $location, $qty)
+	{
+	    $this->movement_type = $type;
+	    $this->item = $item;
+	    $this->location = $location;
+	    $this->qty = $qty;
+	    $this->input_date = new \DateTime();
+	    $this->trans_date = new \DateTime();
+	}
+	
+    /**
+     * Populate from an array.
+     *
+     * @param array $data
+     */
+    public function populate($data = array())
+    {
+        $this->id = $data['id'];
+        $this->qty = $data['qty'];
+        
+    }
+	
+	public function getInputFilter()
+	{
+	    if (!$this->inputFilter)
+	    {
+	        $inputFilter = new InputFilter();
+	        $factory = new InputFactory();
+	
+	        // Id input filter.
+	        $inputFilter->add($factory->createInput(array(
+	            'name' => 'id',
+	            'required' => true,
+	            'filters' => array(
+	                array('name' => 'Int'),
+	            ),
+	        )));
+	        
+	        // Qty input filter.
+	        $inputFilter->add($factory->createInput(array(
+	                'name' => 'qty',
+	                'required' => true,
+	                'filters' => array(
+	                        array('name' => 'Int'),
+	                ),
+	        )));
+	    
+	        // Narrative filter.
+	        $inputFilter->add($factory->createInput(array(
+	            'name' => 'narative',
+	            'required' => false,
+	                'filters' => array(
+	                    array('name' => 'StripTags'),
+	                    array('name' => 'StringTrim'),
+	                ),
+	                'validators' => array(
+	                    array(
+	                        'name' => 'StringLength',
+	                        'options' => array(
+	                            'encoding' => 'UTF-8',
+	                            'min' => 0,
+	                            'max' => 64,
+	                        ),
+	                    ),
+	                ),
+	        )));
+	        
+	        $this->inputFilter = $inputFilter;
+        }
+    
+        return $this->inputFilter;
+    }
 }

@@ -1,3 +1,10 @@
+function removeNotifications()
+{
+	$(".notification").fadeTo(400, 0, function(){
+		$(this).slideUp(400);
+	});
+}
+
 $(function(){
 	
 	// Closes the parent upon click.
@@ -14,7 +21,7 @@ $(function(){
 	oTable = $('.data').dataTable({
 		"sPaginationType": "full_numbers",
 		"bServerSide": true,
-		"sAjaxSource": "/items/index",
+		"sAjaxSource": "/inventory/items/index",
 		"aoColumnDefs": [
 		    { "bSortable": false, "aTargets": [ 'no-sort' ] },
 		    { "sWidth": "100px", "aTargets": [ 'actions' ] },

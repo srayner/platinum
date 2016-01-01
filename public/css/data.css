@@ -10,14 +10,6 @@ h1,h2,h3,h4,h5,h6{
     font-weight: bold;	
 }
 
-.widget-header h3{
-	float: left;
-    padding: 12px 15px 10px;
-    vertical-align: baseline;
-    font-size: 17px;
-    line-height: 1;	
-}
-
 .widget{
 	border-radius: 6px 6px 6px 6px;
 	background: none repeat scroll 0 0 #FFFFFF;
@@ -29,8 +21,14 @@ h1,h2,h3,h4,h5,h6{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     background: url("../images/bg-content-box.gif") repeat-x scroll left top #E5E5E5;
-    height: 40px;
+    padding: 10px 20px;
     margin-top: 1px;
+}
+
+.widget-header h4{
+    margin: 0;
+    padding: 0;
+    line-height: 1;	
 }
 
 .widget-content{
@@ -117,25 +115,25 @@ table.data tbody td {
     text-decoration: none;
 }
 
-.attention{
+.notification.attention{
 	background: url("../images/exclamation.png") no-repeat scroll 10px 11px #FFFBCC;
     border-color: #E6DB55;
     color: #666452;
 }
 
-.information{
+.notification.information{
 	background: url("../images/information.png") no-repeat scroll 10px 11px #DBE3FF;
     border-color: #A2B4EE;
     color: #585B66;
 }
 
-.success{
+.notification.success{
 	background: url("../images/tick_circle.png") no-repeat scroll 10px 11px #D5FFCE;
     border-color: #9ADF8F;
     color: #556652;
 }
 
-.error{
+.notification.error{
     background: url("../images/cross_circle.png") no-repeat scroll 10px 11px #FFCECE;
     border-color: #DF8F8F;
     color: #665252;	

@@ -1,0 +1,39 @@
+<?php
+$title = 'Add new application role';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<div class="widget">
+	<div class="widget-header">
+	    <h3>Role Properties</h3>
+	</div>
+	
+	<div class="widget-content">
+
+		<?php
+		$form = $this->form;
+		$form->setAttribute('action', $this->url('roles', array('action' => 'add')));
+		$form->get('submit')->setAttribute('Value', 'Add');
+		$form->prepare();
+		echo $this->form()->openTag($form);
+		echo $this->formHidden($form->get('id'));
+		?>
+
+		<div class="field"><?php
+		echo $this->formRow($form->get('name'));
+		echo $this->formElementErrors($form->get('name'));
+		
+		?></div>
+		
+		<div class="field"><?php
+		echo $this->formRow($form->get('default'));
+		echo $this->formElementErrors($form->get('default'));
+		?></div>
+
+		<?php 
+		echo $this->formInput($form->get('submit'));
+		echo $this->form()->closeTag($form);
+		?>
+		
+    </div>
+</div>
