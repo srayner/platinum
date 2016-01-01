@@ -15,7 +15,7 @@ $this->headScript()->appendFile('/js/inventory/posting/adjustment.js', 'text/jav
 	<div class="widget-content">
 		<?php
 		$form = $this->form;
-		$form->setAttribute('action', $this->url('inventory/default', array('controller' => 'posting', 'action' => 'receipt')));
+		$form->setAttribute('action', $this->url('inventory/default', array('controller' => 'posting', 'action' => 'adjustment')));
 		$form->get('submit')->setAttribute('Value', 'OK');
 		echo $this->RenderForm($form);
 		?>
