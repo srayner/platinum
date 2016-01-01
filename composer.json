@@ -9,13 +9,19 @@
     "homepage": "http://www.civray-software.com/",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "dev-master",
-        "doctrine/doctrine-module": "dev-master",
-        "doctrine/doctrine-orm-module": "dev-master",
-        "zf-commons/zfc-base": "dev-master",
-        "zf-commons/zfc-user": "dev-master",
-        "zf-commons/zfc-user-doctrine-orm": "dev-master",
-        "zf-commons/zfc-acl": "dev-master"
+        "zendframework/zendframework": "2.1.5",
+        "doctrine/doctrine-orm-module": "0.*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+        
+    },
+    "repositories": [
+    	{
+        	"type": "composer",
+        	"url": "http://packages.zendframework.com/"
+    	}
+	],
+    
     "minimum-stability": "dev"
 }
