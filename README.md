@@ -9,8 +9,10 @@ Installation of this application uses composer. For composer documentation, plea
 
 Simply clone this repository, then install dependencies with composer.
 ```sh
-git clone https://github.com/srayner/platinum.git
-composer install
+mkdir platinum
+cd platinum
+git clone https://github.com/srayner/platinum.git .
+php composer.phar install
 ```
 You next need to create a database. The application currently only supports MySQL, via the PDO driver.
 Create a database called platinum, and a MySQL user with full access to it. Then execute the mysql.sql
