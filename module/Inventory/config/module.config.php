@@ -2,9 +2,11 @@
 namespace Inventory;
 
 return array(
+    
+    // Router configuration.
     'router' => array(
-		'routes' => array(
-		    'inventory' => array(
+        'routes' => array(
+            'inventory' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/inventory',
@@ -31,41 +33,45 @@ return array(
                     ),
                 ),
             ),
-		),
-    ), 
-	'controllers' => array(
-		'invokables' => array(
-		    'Inventory\Controller\Index'          => 'Inventory\Controller\IndexController',    
-			'Inventory\Controller\Items'          => 'Inventory\Controller\ItemsController',
-			'Inventory\Controller\Categories'     => 'Inventory\Controller\CategoriesController',
-			'Inventory\Controller\Locations'      => 'Inventory\Controller\LocationsController',
-			'Inventory\Controller\movement-types' => 'Inventory\Controller\MovementTypesController',
-		    'Inventory\Controller\Units'          => 'Inventory\Controller\UnitsController',
-		    'Inventory\Controller\Posting'        => 'Inventory\Controller\PostingController',
-		),
 	),
-	'view_manager' => array(
-	    'template_map' => include __DIR__  .'/../template_map.php',
-		'template_path_stack' => array(
-			__DIR__ . '/../view',
-		),
-	),
+    ),
+    
+    // Controller configurtion.
+    'controllers' => array(
+        'invokables' => array(
+            'Inventory\Controller\Index'          => 'Inventory\Controller\IndexController',
+            'Inventory\Controller\Items'          => 'Inventory\Controller\ItemsController',
+            'Inventory\Controller\Categories'     => 'Inventory\Controller\CategoriesController',
+            'Inventory\Controller\Locations'      => 'Inventory\Controller\LocationsController',
+            'Inventory\Controller\movement-types' => 'Inventory\Controller\MovementTypesController',
+            'Inventory\Controller\Units'          => 'Inventory\Controller\UnitsController',
+            'Inventory\Controller\Posting'        => 'Inventory\Controller\PostingController',
+        ),
+    ),
+
+    // View manager configuration.
+    'view_manager' => array(
+        'template_map' => include __DIR__  .'/../template_map.php',
+        'template_path_stack' => array(
+            __DIR__ . '/../view',
+        ),
+    ),
 	
-	// Doctrine config
-	'doctrine' => array(
-		'driver' => array(
-			__NAMESPACE__ . '_driver' => array(
-				'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-				'cache' => 'array',
-				'paths' => array(
-					__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity'
-				)
-			),
-			'orm_default' => array(
-				'drivers' => array(
-					__NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-				)
-			)
-		)
-	),
+    // Doctrine configuration.
+    'doctrine' => array(
+        'driver' => array(
+            __NAMESPACE__ . '_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(
+                    __DIR__ . '/../src/' . __NAMESPACE__ . '/Entity'
+                ),
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                ),
+            ),
+        ),
+    ),
 );

@@ -1,0 +1,21 @@
+<?php
+
+// Rename this file to local.php and modify username and password below.
+
+return array(
+    'doctrine' => array(
+        'connection' => array(
+            // default connection name
+            'orm_default' => array(
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'params' => array(
+                    'host'     => 'localhost',
+                    'port'     => '3306',
+                    'user'     => 'youruser',      // <-- Modify to suit
+                    'password' => 'yourpassword',  // <-- Modify to suit
+                    'dbname'   => 'platinum',
+                )
+            )
+        )
+    ),  
+);
