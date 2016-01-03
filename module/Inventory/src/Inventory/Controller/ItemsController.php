@@ -119,6 +119,7 @@ class ItemsController extends AbstractInventoryController
 				$category = $this->getEntityManager()->getReference('Inventory\Entity\Category', $category_id);
 				$item->populate($form->getData());
 				$item->category = $category;
+                                $item->stock_qty = 0;
 				$this->getEntityManager()->persist($item);
 				$this->getEntityManager()->flush();
 	
