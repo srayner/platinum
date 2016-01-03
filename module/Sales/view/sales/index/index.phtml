@@ -1,11 +1,11 @@
 <h3>Transactions</h3>
 
-<a href="<?php echo $this->url('inventory/default', array(
+<a href="<?php echo $this->url('sales/default', array(
     'controller' => 'order',
     'action'     =>'add'
 ));?>">Create Sales Order</a><br>
 
-<a href="<?php echo $this->url('inventory/default', array(
+<a href="<?php echo $this->url('sales/default', array(
         'controller' => 'order',
         'action'     => 'ship'
 ));?>">Ship Sales Order</a><br>
@@ -13,16 +13,16 @@
 <br>
 
 <h3>Enquiries &amp Reports</h3>
-<a href="<?php echo $this->url('inventory/default', array(
+<a href="<?php echo $this->url('sales/default', array(
     'controller' => 'order'
 ));?>">View Sales Orders</a><br>
 
 <br>
 
 <h3>Maintenance</h3>
-<a href="<?php echo $this->url('inventory/default', array(
+<a href="<?php echo $this->url('sales/default', array(
     'controller'=>'account'
 ));?>">Customer Accounts</a><br>
-<a href="<?php echo $this->url('inventory/default', array(
+<a href="<?php echo $this->url('sales/default', array(
     'controller'=>'branch'
 ));?>">Sales Branches</a><br>
