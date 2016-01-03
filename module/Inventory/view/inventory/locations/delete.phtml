@@ -12,13 +12,13 @@ $this->headTitle($title);
 	<div class="widget-content">
 	
         <p>Are you sure that you want to delete location
-        '<?php echo $this->escapeHtml($location['location_code']); ?>'?
+        '<?php echo $this->escapeHtml($location->location_code); ?>'?
         </p>
         <?php
         $form = $this->form;
-        $form->setAttribute('action', $this->url('inventory/default', array('controller' => 'locations', 'action' => 'delete', 'id'=>$this->id)));
+        $form->setAttribute('action', $this->url('inventory/default', array('controller' => 'locations', 'action' => 'delete', 'id'=>$location->id)));
         echo $this->RenderForm($form);
-        $url = $this->url('inventory/default', array('controller' => 'locations', 'action' => 'delete', 'id'=>$this->id)); ?>
+        $url = $this->url('inventory/default', array('controller' => 'locations', 'action' => 'delete', 'id'=>$location->id)); ?>
     
     </div>
 
