@@ -7,7 +7,8 @@ return array(
     //	'ZfcBase',
     //	'ZfcUser',
     //	'ZfcUserDoctrineORM',
-    	'Inventory'
+    	'Inventory',
+        'Sales',
     ),
     'module_listener_options' => array( 
         'config_glob_paths'    => array(

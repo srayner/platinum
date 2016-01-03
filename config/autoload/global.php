@@ -29,8 +29,8 @@ return array(
         	),
         	array(
         		'label' => 'Sales',
-        		'route' => 'roles',
-        		'controller' => 'roles'
+        		'route' => 'sales',
+        		'controller' => 'sales'
         	),	
         	array(
         		'label' => 'Purchasing',

@@ -2,9 +2,8 @@
 namespace Application;
 
 return array(
-    
-	// Routing.
-	'router' => array(
+    // Routing.
+    'router' => array(
         'routes' => array(
             'default' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
@@ -105,15 +104,15 @@ return array(
         ),
     ),
 		
-	// Controller.
+    // Controller.
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-        	'users' => 'Application\Controller\UsersController',
-            'calendar' => 'Application\Controller\CalendarController',
-       	    'roles' => 'Application\Controller\RolesController'
+            'users'                        => 'Application\Controller\UsersController',
+            'calendar'                     => 'Application\Controller\CalendarController',
+            'roles'                        => 'Application\Controller\RolesController'
         ),
-   ),
+    ),
 		
 	// View manager.
     'view_manager' => array(
