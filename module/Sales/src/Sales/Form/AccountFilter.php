@@ -10,7 +10,7 @@ class AccountFilter extends InputFilter
     {
         // Account number
         $this->add(array(
-            'name'       => 'account_number',
+            'name'       => 'accountNumber',
             'required'   => true,
             'validators' => array(
                 array(
@@ -27,7 +27,7 @@ class AccountFilter extends InputFilter
         
         // Company Name
         $this->add(array(
-            'name'       => 'company_name',
+            'name'       => 'companyName',
             'required'   => true,
             'validators' => array(
                 array(
@@ -53,7 +53,7 @@ class AccountFilter extends InputFilter
         
         // Postcode
         $this->add(array(
-            'name'       => 'post_code',
+            'name'       => 'postcode',
             'required'   => false,
             'validators' => array(
                 array(

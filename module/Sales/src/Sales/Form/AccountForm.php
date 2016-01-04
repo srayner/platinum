@@ -24,9 +24,9 @@ class AccountForm extends Form
         
         // account_number
 	$this->add(array(
-	    'name' => 'account_number',
+	    'name' => 'accountNumber',
 	    'options' => array(
-	        'label' => 'Name'
+	        'label' => 'Account Number'
 	    ),
 	    'attributes' => array(
 	        'type' => 'text'
@@ -35,7 +35,7 @@ class AccountForm extends Form
         
         // company_name
 	$this->add(array(
-	    'name' => 'company_name',
+	    'name' => 'companyName',
 	    'options' => array(
 	        'label' => 'Company Name'
 	    ),
@@ -55,7 +55,7 @@ class AccountForm extends Form
         
         // post_code
 	$this->add(array(
-	    'name' => 'post_code',
+	    'name' => 'postcode',
 	    'options' => array(
 	        'label' => 'Postcode'
 	    ),

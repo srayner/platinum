@@ -105,8 +105,43 @@ class AccountController extends AbstractController
     
     public function editAction()
     {
+        // Ensure we have an id, otherwise redirect to add action.
+        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        if (!$id) {
+            return $this->redirect()->toRoute('sales/default', array('controller' => 'account', 'action'=>'add'));
+        }
+	
+        // Grab a copy of the account entity.
+        $account = $this->getEntityManager()->find('Sales\Entity\Account', $id);
+        
+        // Create a new form instance and bind the entity to it.
+	$form = $this->getServiceLocator()->get('sales_account_form');
+        $form->bind($account);
+		
+	// Check if this request is a POST.
+	$request = $this->getRequest();
+	if ($request->isPost())
+        {	
+            // Validate the data.
+            $form->setData($request->getPost());
+            if ($form->isValid())
+            {
+                // Persist changes.
+                $this->getEntityManager()->persist($account);
+                $this->getEntityManager()->flush();
+
+                // Create information message.
+                $this->flashMessenger()->addMessage('Account ' . $account->getAccountNumber() . ' sucesfully updated');
+				
+                // Redirect to list of categories
+		return $this->redirect()->toRoute('sales/default', array('controller' => 'account'));
+            }
+        }
+		
+        // Render (or re-render) the form.
         return array(
-            
+            'id' => $id,
+            'form' => $form,
         );
     }
     
