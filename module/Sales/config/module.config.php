@@ -42,6 +42,7 @@ return array(
         'invokables' => array(
             'Sales\Controller\Index'          => 'Sales\Controller\IndexController',
             'Sales\Controller\Account'        => 'Sales\Controller\AccountController',
+            'Sales\Controller\Branch'         => 'Sales\Controller\BranchController',
         ),
     ),
 
@@ -57,9 +58,11 @@ return array(
     'service_manager' => array(
         'invokables' => array(
             'sales_account' => 'Sales\Entity\Account',
+            'sales_branch'  => 'Sales\Entity\Branch',
         ),
         'factories' => array(
             'sales_account_form' => 'Sales\Form\AccountFormFactory',
+            'sales_branch_form'  => 'Sales\Form\BranchFormFactory',
         ),
     ),
     

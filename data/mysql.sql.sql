@@ -120,6 +120,15 @@ CREATE TABLE `sa_account` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `sa_branch` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `branch_number` varchar(24) NOT NULL,
+  `company_name` varchar(64) NOT NULL,
+  `address` text DEFAULT NULL,
+  `post_code` varchar(8) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- ----------------------------------------------------------------------------- 
 --
 -- User tables
