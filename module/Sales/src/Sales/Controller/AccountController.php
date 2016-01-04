@@ -3,6 +3,7 @@
 namespace Sales\Controller;
 
 use Zend\View\Model\ViewModel;
+use Sales\Form\ConfirmationForm;
 use Doctrine\ORM\Query;
         
 class AccountController extends AbstractController
@@ -147,9 +148,40 @@ class AccountController extends AbstractController
     
     public function deleteAction()
     {
-        return array(
-            
-        );
+        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        if (!$id) {
+            return $this->redirect()->toRoute('sales/default', array('controller' => 'account'));
+        }
+		
+        // Create a new form instance.
+        $form = new ConfirmationForm();
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost()->get('yes', 'No');
+            if ($del == 'Yes') {
+                $id = (int)$request->getPost()->get('id');
+		$account = $this->getEntityManager()->find('Sales\Entity\Account', $id);
+		if ($account) {
+					
+                    // Delete from the database.
+		    $this->getEntityManager()->remove($account);
+		    $this->getEntityManager()->flush();
+					
+		    // Create information message.
+		    $this->flashMessenger()->addMessage('Account ' . $account->getAccountNumber() . ' sucesfully deleted');
+		}
+	    }
+
+	    // Redirect to list of categories
+	    return $this->redirect()->toRoute('sales/default', array('controller' => 'account'));
+	}
+
+	$form->populateValues(array('id' => $id));
+	return array(
+	    'account' => $this->getEntityManager()->find('Sales\Entity\Account', $id),
+            'form' => $form
+	);
     }
 }
 

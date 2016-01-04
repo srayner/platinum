@@ -1,8 +1,24 @@
 <?php
+$title = 'Delete sales account';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+    <div class="widget-header">
+	    <h4><?php echo $this->escapeHtml($title); ?></h4>
+	</div>
+	
+	<div class="widget-content">
+	
+        <p>Are you sure that you want to delete
+        '<?php echo $this->escapeHtml($this->account->getAccountNumber()); ?>',?
+        </p>
+        <?php
+            $form = $this->form;
+            $form->setAttribute('action', $this->url('sales/default', array('controller' => 'account', 'action' => 'delete', 'id'=>$account->getId())));
+            echo $this->RenderForm($form);
+        ?>
+    </div>
 
+</div>
