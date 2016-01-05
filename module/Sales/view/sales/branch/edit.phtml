@@ -1,18 +1,18 @@
 <?php
-$title = 'Edit sales account';
+$title = 'Edit sales branch';
 $this->headTitle($title);
 ?>
 <h3><?php echo $this->escapeHtml($title); ?></h3>
 <div class="widget">
 	
     <div class="widget-header">
-        <h4>Account Details</h4>
+        <h4>Branch Details</h4>
     </div>
 	
     <div class="widget-content">
         <?php
             $form = $this->form;
-            $form->setAttribute('action', $this->url('sales/default', array('controller' => 'account', 'action' => 'edit', 'id' => $this->id)));
+            $form->setAttribute('action', $this->url('sales/default', array('controller' => 'branch', 'action' => 'edit', 'id' => $this->id)));
             $form->get('submit')->setAttribute('Value', 'Edit');
             echo $this->RenderForm($form);
         ?>

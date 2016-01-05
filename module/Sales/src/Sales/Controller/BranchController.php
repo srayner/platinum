@@ -103,4 +103,46 @@ class BranchController extends AbstractController
 	// If not a POST request, or invalid data, then just render the form.
 	return array('form' => $form);
     }
+    
+    public function editAction()
+    {
+        // Ensure we have an id, otherwise redirect to add action.
+        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        if (!$id) {
+            return $this->redirect()->toRoute('sales/default', array('controller' => 'branch', 'action'=>'add'));
+        }
+	
+        // Grab a copy of the branch entity.
+        $branch = $this->getEntityManager()->find('Sales\Entity\Branch', $id);
+        
+        // Create a new form instance and bind the entity to it.
+	$form = $this->getServiceLocator()->get('sales_branch_form');
+        $form->bind($branch);
+		
+	// Check if this request is a POST.
+	$request = $this->getRequest();
+	if ($request->isPost())
+        {	
+            // Validate the data.
+            $form->setData($request->getPost());
+            if ($form->isValid())
+            {
+                // Persist changes.
+                $this->getEntityManager()->persist($branch);
+                $this->getEntityManager()->flush();
+
+                // Create information message.
+                $this->flashMessenger()->addMessage('Branch ' . $branch->getBranchNumber() . ' sucesfully updated');
+				
+                // Redirect to list of branches
+		return $this->redirect()->toRoute('sales/default', array('controller' => 'branch'));
+            }
+        }
+		
+        // Render (or re-render) the form.
+        return array(
+            'id' => $id,
+            'form' => $form,
+        );
+    }
 }
