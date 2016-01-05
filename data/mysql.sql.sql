@@ -112,22 +112,49 @@ ALTER TABLE `sc_transactions`
 --
 
 CREATE TABLE `sa_account` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id`             int(11) NOT NULL AUTO_INCREMENT,
   `account_number` varchar(24) NOT NULL,
-  `company_name` varchar(64) NOT NULL,
-  `address` text DEFAULT NULL,
-  `post_code` varchar(8) DEFAULT NULL,
+  `company_name`   varchar(64) NOT NULL,
+  `address`        text DEFAULT NULL,
+  `post_code`      varchar(8) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `sa_branch` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id`            int(11) NOT NULL AUTO_INCREMENT,
   `branch_number` varchar(24) NOT NULL,
-  `company_name` varchar(64) NOT NULL,
-  `address` text DEFAULT NULL,
-  `post_code` varchar(8) DEFAULT NULL,
+  `company_name`  varchar(64) NOT NULL,
+  `address`       text DEFAULT NULL,
+  `post_code`     varchar(8) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `sa_order` (
+  `id`            int(11) NOT NULL AUTO_INCREMENT,
+  `order_date`    date NOT NULL,
+  `order_status`  varchar(24) NOT NULL,
+  `customer_ref`  varchar(24),
+  `sa_account_id` int(11) NOT NULL,
+  `sa_branch_id`  int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `sa_order_line` (
+  `id`            int(11) NOT NULL AUTO_INCREMENT,
+  `sa_order_id`   int(11) NOT NULL,
+  `sc_item_id`    int(11) NOT NULL,
+  `qty`           int(11) NOT NULL,
+  `order_status`  varchar(24) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `sa_order`
+  ADD CONSTRAINT `FK_SA_ORDER_SA_ACCOUNT` FOREIGN KEY (`sa_account_id`) REFERENCES `sa_account` (`id`),
+  ADD CONSTRAINT `FK_SA_ORDER_SA_BRANCH` FOREIGN KEY (`sa_branch_id`) REFERENCES `sa_branch` (`id`);
+
+ALTER TABLE `sa_order_line`
+  ADD CONSTRAINT `FK_SA_ORDER_LINE_SA_ORDER` FOREIGN KEY (`sa_order_id`) REFERENCES `sa_account` (`id`),
+  ADD CONSTRAINT `FK_SA_ORDER_LINE_SC_ITEM` FOREIGN KEY (`sc_item_id`) REFERENCES `sa_branch` (`id`);
 
 -- ----------------------------------------------------------------------------- 
 --
