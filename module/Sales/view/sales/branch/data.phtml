@@ -8,16 +8,16 @@ $output = array(
     "aaData" => array()
 );
 
-foreach($accounts as $account)
+foreach($branches as $branch)
 {
     $actions = '<a class="icon edit" title="Edit" href="' . $this->url(
-        'sales/default', array('controller' => 'account', 'action'=>'edit', 'id' => $account->getId())) . '"></a>' .
+        'sales/default', array('controller' => 'branch', 'action'=>'edit', 'id' => $branch->getId())) . '"></a>' .
 	'<a class="icon delete" title="Delete" href="' . $this->url(
-	'inventory/default', array('controller' => 'categories', 'action'=>'delete', 'id' => $account->getId())) . '"></a>';
+	'inventory/default', array('controller' => 'branch', 'action'=>'delete', 'id' => $branch->getId())) . '"></a>';
 	 
 	$row = array();
-	$row[] = $this->escapeHtml($account->getAccountNumber());
-        $row[] = $this->escapeHtml($account->getCompanyName());
+	$row[] = $this->escapeHtml($branch->getBranchNumber());
+        $row[] = $this->escapeHtml($branch->getCompanyName());
 	$row[] = $actions;
 	$output['aaData'][] = $row;
 }
