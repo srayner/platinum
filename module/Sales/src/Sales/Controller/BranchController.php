@@ -145,4 +145,42 @@ class BranchController extends AbstractController
             'form' => $form,
         );
     }
+    
+    public function deleteAction()
+    {
+        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        if (!$id) {
+            return $this->redirect()->toRoute('sales/default', array('controller' => 'branch'));
+        }
+		
+        // Create a new form instance.
+        $form = new ConfirmationForm();
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost()->get('yes', 'No');
+            if ($del == 'Yes') {
+                $id = (int)$request->getPost()->get('id');
+		$branch = $this->getEntityManager()->find('Sales\Entity\Branch', $id);
+		if ($branch) {
+					
+                    // Delete from the database.
+		    $this->getEntityManager()->remove($branch);
+		    $this->getEntityManager()->flush();
+					
+		    // Create information message.
+		    $this->flashMessenger()->addMessage('Branch ' . $branch->getBranchNumber() . ' sucesfully deleted');
+		}
+	    }
+
+	    // Redirect to list of branches
+	    return $this->redirect()->toRoute('sales/default', array('controller' => 'branch'));
+	}
+
+	$form->populateValues(array('id' => $id));
+	return array(
+	    'branch' => $this->getEntityManager()->find('Sales\Entity\Branch', $id),
+            'form' => $form
+	);
+    }
 }
