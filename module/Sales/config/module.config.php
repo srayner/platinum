@@ -43,6 +43,7 @@ return array(
             'Sales\Controller\Index'          => 'Sales\Controller\IndexController',
             'Sales\Controller\Account'        => 'Sales\Controller\AccountController',
             'Sales\Controller\Branch'         => 'Sales\Controller\BranchController',
+            'Sales\Controller\Order'          => 'Sales\Controller\OrderController',
         ),
     ),
 
@@ -59,10 +60,12 @@ return array(
         'invokables' => array(
             'sales_account' => 'Sales\Entity\Account',
             'sales_branch'  => 'Sales\Entity\Branch',
+            'sales_order'   => 'Sales\Entity\Order',
         ),
         'factories' => array(
             'sales_account_form' => 'Sales\Form\AccountFormFactory',
             'sales_branch_form'  => 'Sales\Form\BranchFormFactory',
+            'sales_order_form'   => 'Sales\Form\OrderFormFactory',
         ),
     ),
     
