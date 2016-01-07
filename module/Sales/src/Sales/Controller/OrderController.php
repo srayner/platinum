@@ -67,9 +67,57 @@ class OrderController extends AbstractController
     
     public function indexAction()
     {
-        $orders = $this->getEntityManager()->getRepository('Sales\Entity\Order')->findAll();
-        return array(
-            'orders' => $orders
+        $aColumns = array('o.id', 'o.customerRef');
+        $params = $this->getDataTablesParams();
+        
+        // Build the from clause.
+        $from = 'FROM Sales\Entity\Order o ';
+        
+        // Get record count.
+        $dql = 'SELECT COUNT(o.id) ' . $from;
+        $where = '';
+        if($params['sSearch'] != '')
+        {
+            $where = "WHERE o.customerRef LIKE '%" . $params['sSearch'] . "%' ";
+            $dql = $dql . $where;
+        }
+        $query = $this->getEntityManager()->createQuery($dql);
+        $count = $query->getResult(Query::HYDRATE_SINGLE_SCALAR);
+        
+        // Build the order by clause.
+        $orderBy = '';
+        if ($params['iSortingCols'] > 0)
+        {
+            $orderBy = 'ORDER BY ' . $aColumns[$params['iSortIndex']] . ' ' . strtoupper($params['sSortDir']) . ' ';
+        }
+        
+        // Build query.
+        $dql = 'SELECT o ' . $from . $where . $orderBy;
+        $query = $this->getEntityManager()->createQuery($dql);
+        $query->setFirstResult($params['iDisplayStart']);
+        $query->setMaxResults($params['iDisplayLength']);
+        
+        // Build the view models, passing in all relevant data.
+        $variables = array(
+            "sEcho" => $params['sEcho'],
+            "iTotalRecords" => $count,
+            "iTotalDisplayRecords" => $count,
+            'orders' => $query->getResult()
         );
+        if ($this->flashMessenger()->hasMessages())
+        {
+            $variables['messages'] = $this->flashMessenger()->getMessages();
+	}
+	$view = new ViewModel($variables);
+        
+        // Make adjustments if request is expecting JSON response.
+	if ($this->request->isXmlHttpRequest())
+	{
+	    $view->setTerminal(true);
+            $view->setTemplate('sales/order/data');
+	}
+		
+        // Finally return the view
+        return $view;
     }
 }
