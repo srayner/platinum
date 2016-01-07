@@ -26,8 +26,12 @@ class OrderController extends AbstractController
 	    $form->setData($request->getPost());
 	    if ($form->isValid())
 	    {
+                $accountRef = $this->getEntityManager()->getReference('Sales\Entity\Account', 1);
+                $branchRef  = $this->getEntityManager()->getReference('Sales\Entity\Branch', 1);
                 $order->setOrderStatus('Being entered.')
-                      ->setOrderDate(new DateTime());
+                      ->setOrderDate(new DateTime())
+                      ->setAccount($accountRef)
+                      ->setBranch($branchRef);
 		$this->getEntityManager()->persist($order);
 		$this->getEntityManager()->flush();
 

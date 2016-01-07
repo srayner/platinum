@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="sa_order")
  */
-class Order
+class OrderLine
 {
     /**
      * @ORM\Id
@@ -20,7 +20,7 @@ class Order
     protected $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="SalesOrder", inversedBy="lines")
+     * @ORM\ManyToOne(targetEntity="Order", inversedBy="lines")
      * @ORM\JoinColumn(name="sa_order_id", referencedColumnName="id")
      */
     protected $order;

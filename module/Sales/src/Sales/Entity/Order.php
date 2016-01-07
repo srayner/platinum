@@ -26,7 +26,7 @@ class Order
     protected $orderStatus;
     
     /**
-     * @ORM\Column(type="date", name="account_date")
+     * @ORM\Column(type="date", name="order_date")
      */
     protected $orderDate;
     
@@ -48,7 +48,7 @@ class Order
     protected $branch;
     
     /**
-     * @OneToMany(targetEntity="OrderLine", mappedBy="order")
+     * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="order")
      */
     protected $lines;
     
