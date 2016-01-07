@@ -11,15 +11,7 @@ class AccountController extends AbstractController
     public function indexAction()
     {
         $aColumns = array('a.accountNumber', 'a.companyName');
-        
-        // Get parameters from the ajax request
-        $sEcho          = $this->params()->fromQuery('sEcho');
-        $iDisplayStart  = $this->params()->fromQuery('iDisplayStart', 0);
-        $iDisplayLength = $this->params()->fromQuery('iDisplayLength', 10);
-        $iSortingCols   = $this->params()->fromQuery('iSortingCols', 1);
-        $iSortIndex     = $this->params()->fromQuery('iSortCol_0', 0);
-        $sSortDir       = $this->params()->fromQuery('sSortDir_0', 'asc');
-        $sSearch        = $this->params()->fromQuery('sSearch', '');
+        $params = $this->getDataTablesParams();
         
         // Build the from clause.
         $from = 'FROM Sales\Entity\Account a ';
@@ -27,9 +19,9 @@ class AccountController extends AbstractController
         // Get record count.
         $dql = 'SELECT COUNT(a.id) ' . $from;
         $where = '';
-        if($sSearch != '')
+        if($params['sSearch'] != '')
         {
-            $where = "WHERE a.company_name LIKE '%" . $sSearch . "%' ";
+            $where = "WHERE a.company_name LIKE '%" . $params['sSearch'] . "%' ";
             $dql = $dql . $where;
         }
         $query = $this->getEntityManager()->createQuery($dql);
@@ -37,20 +29,20 @@ class AccountController extends AbstractController
 	
         // Build the order by clause.
         $orderBy = '';
-        if ($iSortingCols > 0)
+        if ($params['iSortingCols'] > 0)
         {
-            $orderBy = 'ORDER BY ' . $aColumns[$iSortIndex] . ' ' . strtoupper($sSortDir) . ' ';
+            $orderBy = 'ORDER BY ' . $aColumns[$params['iSortIndex']] . ' ' . strtoupper($params['sSortDir']) . ' ';
         }
 		
         // Build query.
         $dql = 'SELECT a ' . $from . $where  . $orderBy;
         $query = $this->getEntityManager()->createQuery($dql);
-        $query->setFirstResult($iDisplayStart);
-        $query->setMaxResults($iDisplayLength);
+        $query->setFirstResult($params['iDisplayStart']);
+        $query->setMaxResults($params['iDisplayLength']);
 		
         // Build the view models, passing in all relevant data.
         $variables = array(
-            "sEcho" => $sEcho,
+            "sEcho" => $params['sEcho'],
             "iTotalRecords" => $count,
             "iTotalDisplayRecords" => $count,
             'accounts' => $query->getResult()
