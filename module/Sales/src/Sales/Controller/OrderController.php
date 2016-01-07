@@ -64,4 +64,12 @@ class OrderController extends AbstractController
             'order' => $this->getEntityManager()->find('Sales\Entity\Order', $id)
         );
     }
+    
+    public function indexAction()
+    {
+        $orders = $this->getEntityManager()->getRepository('Sales\Entity\Order')->findAll();
+        return array(
+            'orders' => $orders
+        );
+    }
 }

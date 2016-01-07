@@ -23,4 +23,16 @@ abstract class AbstractController extends AbstractActionController
         return $this->em;
     }
     
+    protected function getDataTablesParams()
+    {
+        return array(
+            'sEcho'          => $this->params()->fromQuery('sEcho'),
+            'iDisplayStart'  => $this->params()->fromQuery('iDisplayStart', 0),
+            'iDisplayLength' => $this->params()->fromQuery('iDisplayLength', 10),
+            'iSortingCols'   => $this->params()->fromQuery('iSortingCols', 1),
+            'iSortIndex'     => $this->params()->fromQuery('iSortCol_0', 0),
+            'sSortDir'       => $this->params()->fromQuery('sSortDir_0', 'asc'),
+            'sSearch'        => $this->params()->fromQuery('sSearch', '')
+        );
+    }
 }
