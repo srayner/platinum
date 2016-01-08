@@ -33,7 +33,11 @@
 	        '<a class="icon delete" title="Delete" href="' . $this->url(
 	        'sales/default', array('controller' => 'order', 'action'=>'delete', 'id' => $order->getId())) . '"></a>';?>
                 <tr>
-                    <td><?php echo $this->escapeHtml($order->getId());?></td>
+                    <td><a href="<?php echo $this->url('sales/default', array(
+                        'controller' => 'order',
+                        'action'     => 'detail',
+                        'id'         => $order->getId()
+                    ));?>"><?php echo $this->escapeHtml($order->getId());?></a></td>
                     <td><?php echo $order->getOrderDate()->format('d/m/Y');?></td>
                     <td><?php echo $this->escapeHtml($order->getCustomerRef());?></td>
                     <td><?php echo $actions;?></td>
