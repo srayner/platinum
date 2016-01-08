@@ -1,1 +1,16 @@
 <h2>Sales Order Detail</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Order No</th>
+        <td><?php echo $this->order->getId();?></td>
+    </tr>
+    <tr>
+        <th>Order Date</th>
+        <td><?php echo $this->order->getOrderDate()->format('d/m/Y');?></td>
+    </tr>
+    <tr>
+        <th>Customer Ref</th>
+        <td><?php echo $this->order->getCustomerRef();?></td>
+    </tr>
+</table>
