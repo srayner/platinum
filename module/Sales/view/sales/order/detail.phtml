@@ -17,4 +17,13 @@
         <th>Customer Ref</th>
         <td><?php echo $this->order->getCustomerRef();?></td>
     </tr>
+    <tr>
+        <th>Order Status</th>
+        <td><?php echo $this->order->getOrderStatus();?></td>
+    </tr>
 </table>
+
+<p><a href="<?php echo $this->url('sales/default', array(
+    'controller' => 'order',
+    'action' => 'addline'
+        ));?>">Add item to order</a></p>
