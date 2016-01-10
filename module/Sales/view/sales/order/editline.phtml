@@ -1,0 +1,16 @@
+<?php
+    $title = 'Add order line item';
+    $this->headTitle($title);
+    $this->headScript()->appendFile('/js/bootstrap.js', 'text/javascript');
+    $this->headScript()->appendFile('/js/bootstrap-typeahead.js', 'text/javascript');
+    $this->headScript()->appendFile('/js/sales/order/editline.js', 'text/javascript');
+?>
+
+<h2>Edit Item on Order</h2>
+
+<?php
+    $form = $this->form;
+    $form->setAttribute('action', $this->url('sales/default', array('controller' => 'order', 'action' => 'editline', 'id' => $this->id)));
+    $form->get('submit')->setAttribute('Value', 'Edit');
+    echo $this->RenderForm($form);
+?>

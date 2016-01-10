@@ -4,7 +4,7 @@
     'controller' => 'order'
         ));?>">Back to Sales orders</a></p>
 
-<table class="table table-bordered">
+<table class="table table-bordered table-condensed">
     <tr>
         <th>Order No</th>
         <td><?php echo $this->order->getId();?></td>
@@ -23,27 +23,34 @@
     </tr>
 </table>
 
-<table class="table table-bordered">
+<table class="data dataTable">
     <thead>
         <tr>
             <th>Line No</th>
             <th>Item Code</th>
             <th>Qty</th>
             <th>Status</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         <?php $i = 1;?>
         <?php foreach($order->getLines() as $item):?>
         <tr>
+            <?php $actions = '<a class="icon edit" title="Edit" href="' . $this->url(
+	        'sales/default', array('controller' => 'order', 'action'=>'editline', 'id' => $item->getId())) . '"></a>' . 
+	        '<a class="icon delete" title="Delete" href="' . $this->url(
+	        'sales/default', array('controller' => 'order', 'action'=>'deleteline', 'id' => $item->getId())) . '"></a>';?>
             <td><?php echo $i;?></td>
             <td><?php echo $item->getItem()->item_code;?></td>
             <td><?php echo $item->getQty();?></td>
             <td><?php echo $item->getOrderStatus();?></td>
+            <td><?php echo $actions;?></td>
         </tr>
         <?php endforeach;?>
     </tbody>
 </table>
+<br>
 
 <p><a href="<?php echo $this->url('sales/default', array(
     'controller' => 'order',

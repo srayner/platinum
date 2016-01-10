@@ -17,7 +17,7 @@ class LineForm extends Form
     {
         // Item Code.
         $this->add(array(
-            'name' => 'item_code',
+            'name' => 'itemCode',
             'options' => array(
                 'label' => 'Item Code'
             ),

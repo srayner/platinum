@@ -168,4 +168,46 @@ class OrderController extends AbstractController
             'form' => $form
         );
     }
+    
+    public function editlineAction()
+    {
+        // Ensure we have an id, otherwise redirect to sales order index.
+        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        if (!$id) {
+            return $this->redirect()->toRoute('sales/default', array('controller' => 'order'));
+        }
+	
+        // Grab a copy of the branch entity.
+        $line = $this->getEntityManager()->find('Sales\Entity\OrderLine', $id);
+        
+        // Create a new form instance and bind the entity to it.
+	$form = $this->getServiceLocator()->get('sales_line_form');
+        $form->bind($line);
+		
+	// Check if this request is a POST.
+	$request = $this->getRequest();
+	if ($request->isPost())
+        {	
+            // Validate the data.
+            $form->setData($request->getPost());
+            if ($form->isValid())
+            {
+                // Persist changes.
+                $this->getEntityManager()->persist($line);
+                $this->getEntityManager()->flush();
+
+                // Create information message.
+                $this->flashMessenger()->addMessage('Line item updated successfully.');
+				
+                // Redirect to order detail
+		return $this->redirect()->toRoute('sales/default', array('controller' => 'order', 'action' => 'detail', 'id', $line->getOrder()->getId()));
+            }
+        }
+		
+        // Render (or re-render) the form.
+        return array(
+            'id' => $id,
+            'form' => $form,
+        );
+    }
 }
