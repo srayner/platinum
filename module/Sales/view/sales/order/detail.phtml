@@ -23,7 +23,30 @@
     </tr>
 </table>
 
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Line No</th>
+            <th>Item Code</th>
+            <th>Qty</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $i = 1;?>
+        <?php foreach($order->getLines() as $item):?>
+        <tr>
+            <td><?php echo $i;?></td>
+            <td><?php echo $item->getItem()->item_code;?></td>
+            <td><?php echo $item->getQty();?></td>
+            <td><?php echo $item->getOrderStatus();?></td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
+
 <p><a href="<?php echo $this->url('sales/default', array(
     'controller' => 'order',
-    'action' => 'addline'
+    'action' => 'addline',
+    'id' => $this->order->getId()
         ));?>">Add item to order</a></p>

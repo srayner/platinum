@@ -58,14 +58,16 @@ return array(
     // Service manager
     'service_manager' => array(
         'invokables' => array(
-            'sales_account' => 'Sales\Entity\Account',
-            'sales_branch'  => 'Sales\Entity\Branch',
-            'sales_order'   => 'Sales\Entity\Order',
+            'sales_account'    => 'Sales\Entity\Account',
+            'sales_branch'     => 'Sales\Entity\Branch',
+            'sales_order'      => 'Sales\Entity\Order',
+            'sales_order_line' => 'Sales\Entity\OrderLine'
         ),
         'factories' => array(
             'sales_account_form' => 'Sales\Form\AccountFormFactory',
             'sales_branch_form'  => 'Sales\Form\BranchFormFactory',
             'sales_order_form'   => 'Sales\Form\OrderFormFactory',
+            'sales_line_form'    => 'Sales\Form\LineFormFactory'
         ),
     ),
     

@@ -120,4 +120,52 @@ class OrderController extends AbstractController
         // Finally return the view
         return $view;
     }
+    
+    public function addlineAction()
+    {
+        // Ensure we have an id, otherwise redirect to add action.
+        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        if (!$id) {
+            return $this->redirect()->toRoute('sales/default', array('controller' => 'order'));
+        }
+        
+        $order = $this->getEntityManager()->find('Sales\Entity\Order', $id);
+        
+        // Create a new form instance.
+	$form = $this->getServiceLocator()->get('sales_line_form');
+
+	// Check if the request is a POST
+	$request = $this->getRequest();
+	if ($request->isPost())
+	{		
+	    // Create a new Account instance.
+	    $line = $this->getServiceLocator()->get('sales_order_line');
+            
+	    // Check form is valid.
+            $form->bind($line);
+	    $form->setData($request->getPost());
+	    if ($form->isValid())
+	    {
+                $item_code = $this->params()->fromPost('item_code');
+                $item = $this->getEntityManager()->getRepository('Inventory\Entity\Item')->findOneBy(array('item_code' => $item_code));
+                $line->setItem($item)
+                     ->setOrder($order)
+                     ->setOrderStatus('Awaiting acknowledgement');
+		$this->getEntityManager()->persist($line);
+		$this->getEntityManager()->flush();
+
+		// Create information message.
+		$this->flashMessenger()->addMessage('Item added ok.');
+				
+		// Redirect to order detail
+		return $this->redirect()->toRoute('sales/default', array('controller' => 'order', 'action' => 'detail', 'id' => $id));
+	    }
+	}
+        
+        
+        return array(
+            'order' => $order,
+            'form' => $form
+        );
+    }
 }

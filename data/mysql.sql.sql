@@ -154,7 +154,7 @@ ALTER TABLE `sa_order`
 
 ALTER TABLE `sa_order_line`
   ADD CONSTRAINT `FK_SA_ORDER_LINE_SA_ORDER` FOREIGN KEY (`sa_order_id`) REFERENCES `sa_account` (`id`),
-  ADD CONSTRAINT `FK_SA_ORDER_LINE_SC_ITEM` FOREIGN KEY (`sc_item_id`) REFERENCES `sa_branch` (`id`);
+  ADD CONSTRAINT `FK_SA_ORDER_LINE_SC_ITEM` FOREIGN KEY (`sc_item_id`) REFERENCES `sc_items` (`id`);
 
 -- ----------------------------------------------------------------------------- 
 --

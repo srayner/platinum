@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * A sales order line entity.
  *
  * @ORM\Entity
- * @ORM\Table(name="sa_order")
+ * @ORM\Table(name="sa_order_line")
  */
 class OrderLine
 {

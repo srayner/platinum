@@ -122,5 +122,10 @@ class Order
         $this->branch = $branch;
         return $this;
     }
+    
+    public function getLines()
+    {
+        return $this->lines;
+    }
 }
 
