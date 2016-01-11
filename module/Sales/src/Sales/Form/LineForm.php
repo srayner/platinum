@@ -15,6 +15,14 @@ class LineForm extends Form
     
     private function addElements()
     {
+        // id
+        $this->add(array(
+            'name' => 'id',
+	    'attributes' => array(
+		'type' => 'hidden',
+	    ),
+	));
+        
         // Item Code.
         $this->add(array(
             'name' => 'itemCode',
