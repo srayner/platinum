@@ -210,4 +210,44 @@ class OrderController extends AbstractController
             'form' => $form,
         );
     }
+    
+    public function deletelineAction()
+    {
+        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        if (!$id) {
+            return $this->redirect()->toRoute('sales/default', array('controller' => 'order'));
+        }
+	
+        // Grab the order line entity.
+        $orderLine = $this->getEntityManager()->find('Sales\Entity\OrderLine', $id);
+        
+        // Get the order id for redirecting back to the order.
+        $orderId = $orderLine->getOrder()->getId();
+        
+        // Create a new form instance.
+        $form = new ConfirmationForm();
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost()->get('yes', 'No');
+            if ($del == 'Yes') {
+					
+                // Delete from the database.
+		$this->getEntityManager()->remove($orderLine);
+		$this->getEntityManager()->flush();
+					
+		// Create information message.
+		$this->flashMessenger()->addMessage('Item ' . $orderLine->getId() . ' sucesfully deleted');
+	    }
+
+	    // Redirect to order
+	    return $this->redirect()->toRoute('sales/default', array('controller' => 'order', 'action' => 'detail', 'id' => $orderId));
+	}
+
+	$form->populateValues(array('id' => $id));
+	return array(
+	    'orderLine' => $this->getEntityManager()->find('Sales\Entity\OrderLine', $id),
+            'form' => $form
+	);
+    }
 }

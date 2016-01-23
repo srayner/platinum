@@ -1,0 +1,24 @@
+<?php
+$title = 'Delete sales order line item';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
+
+    <div class="widget-header">
+	    <h4><?php echo $this->escapeHtml($title); ?></h4>
+	</div>
+	
+	<div class="widget-content">
+	
+        <p>Are you sure that you want to delete
+        '<?php echo $this->escapeHtml($this->orderLine->getItem()->item_code); ?>',?
+        </p>
+        <?php
+            $form = $this->form;
+            $form->setAttribute('action', $this->url('sales/default', array('controller' => 'order', 'action' => 'deleteline', 'id'=>$orderLine->getId())));
+            echo $this->RenderForm($form);
+        ?>
+    </div>
+
+</div>

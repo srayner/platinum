@@ -1,9 +1,6 @@
 <?php
     $title = 'Add order line item';
     $this->headTitle($title);
-    $this->headScript()->appendFile('/js/bootstrap.js', 'text/javascript');
-    $this->headScript()->appendFile('/js/bootstrap-typeahead.js', 'text/javascript');
-    $this->headScript()->appendFile('/js/sales/order/addline.js', 'text/javascript');
 ?>
 
 <h2>Add Item to Order <?php echo $this->order->getId();?></h2>
