@@ -57,3 +57,9 @@
     'action' => 'addline',
     'id' => $this->order->getId()
         ));?>">Add item to order</a></p>
+
+<p><a href="<?php echo $this->url('sales/default', array(
+    'controller' => 'order',
+    'action' => 'acknowledge',
+    'id' => $this->order->getId()
+        ));?>">Acknowledge order</a></p>

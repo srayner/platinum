@@ -9,6 +9,11 @@ use DateTime;
         
 class OrderController extends AbstractController
 {
+    public function acknowledgeAction()
+    {
+        return new ViewModel();
+    }
+    
     public function createAction()
     {
         // Create a new form instance.
