@@ -44,6 +44,7 @@ return array(
             'Sales\Controller\Account'        => 'Sales\Controller\AccountController',
             'Sales\Controller\Branch'         => 'Sales\Controller\BranchController',
             'Sales\Controller\Order'          => 'Sales\Controller\OrderController',
+            'Sales\Controller\Representative' => 'Sales\Controller\RepresentativeController',
         ),
     ),
 
@@ -58,16 +59,18 @@ return array(
     // Service manager
     'service_manager' => array(
         'invokables' => array(
-            'sales_account'    => 'Sales\Entity\Account',
-            'sales_branch'     => 'Sales\Entity\Branch',
-            'sales_order'      => 'Sales\Entity\Order',
-            'sales_order_line' => 'Sales\Entity\OrderLine'
+            'sales_account'        => 'Sales\Entity\Account',
+            'sales_branch'         => 'Sales\Entity\Branch',
+            'sales_order'          => 'Sales\Entity\Order',
+            'sales_order_line'     => 'Sales\Entity\OrderLine',
+            'sales_representative' => 'Sales\Entity\Representative',
         ),
         'factories' => array(
-            'sales_account_form' => 'Sales\Form\AccountFormFactory',
-            'sales_branch_form'  => 'Sales\Form\BranchFormFactory',
-            'sales_order_form'   => 'Sales\Form\OrderFormFactory',
-            'sales_line_form'    => 'Sales\Form\LineFormFactory'
+            'sales_account_form'        => 'Sales\Form\AccountFormFactory',
+            'sales_branch_form'         => 'Sales\Form\BranchFormFactory',
+            'sales_order_form'          => 'Sales\Form\OrderFormFactory',
+            'sales_line_form'           => 'Sales\Form\LineFormFactory',
+            'sales_representative_form' => 'Sales\Form\RepresentativeFormFactory',
         ),
     ),
     
