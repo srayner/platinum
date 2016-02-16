@@ -129,6 +129,14 @@ CREATE TABLE `sa_branch` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `sa_representative` (
+  `id`            int(11) NOT NULL AUTO_INCREMENT,
+  `firstname`     varchar(24),
+  `lastname`      varchar(24),
+  `description`   varchar(128),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `sa_order` (
   `id`            int(11) NOT NULL AUTO_INCREMENT,
   `order_date`    date NOT NULL,
