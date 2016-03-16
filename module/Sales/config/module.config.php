@@ -42,6 +42,7 @@ return array(
         'invokables' => array(
             'Sales\Controller\Index'          => 'Sales\Controller\IndexController',
             'Sales\Controller\Account'        => 'Sales\Controller\AccountController',
+            'Sales\Controller\Area'           => 'Sales\Controller\AreaController',
             'Sales\Controller\Branch'         => 'Sales\Controller\BranchController',
             'Sales\Controller\Order'          => 'Sales\Controller\OrderController',
             'Sales\Controller\Representative' => 'Sales\Controller\RepresentativeController',
@@ -60,6 +61,7 @@ return array(
     'service_manager' => array(
         'invokables' => array(
             'sales_account'        => 'Sales\Entity\Account',
+            'sales_area'           => 'Sales\Entity\Area',
             'sales_branch'         => 'Sales\Entity\Branch',
             'sales_order'          => 'Sales\Entity\Order',
             'sales_order_line'     => 'Sales\Entity\OrderLine',
@@ -67,6 +69,7 @@ return array(
         ),
         'factories' => array(
             'sales_account_form'        => 'Sales\Form\AccountFormFactory',
+            'sales_area_form'           => 'Sales\Form\AreaFormFactory',
             'sales_branch_form'         => 'Sales\Form\BranchFormFactory',
             'sales_order_form'          => 'Sales\Form\OrderFormFactory',
             'sales_line_form'           => 'Sales\Form\LineFormFactory',

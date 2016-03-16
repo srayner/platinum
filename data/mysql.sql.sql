@@ -137,6 +137,13 @@ CREATE TABLE `sa_representative` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `sa_area` (
+  `id`            int(11) NOT NULL AUTO_INCREMENT,
+  `code`          varchar(16),
+  `description`   varchar(128),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `sa_order` (
   `id`            int(11) NOT NULL AUTO_INCREMENT,
   `order_date`    date NOT NULL,

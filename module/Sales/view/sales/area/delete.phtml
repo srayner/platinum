@@ -1,0 +1,24 @@
+<?php
+$title = 'Delete sales area';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<div class="widget">
+
+    <div class="widget-header">
+	    <h4><?php echo $this->escapeHtml($title); ?></h4>
+	</div>
+	
+	<div class="widget-content">
+	
+        <p>Are you sure that you want to delete area
+        '<?php echo $this->escapeHtml($this->area->getCode()); ?>',?
+        </p>
+        <?php
+            $form = $this->form;
+            $form->setAttribute('action', $this->url('sales/default', array('controller' => 'area', 'action' => 'delete', 'id'=>$area->getId())));
+            echo $this->RenderForm($form);
+        ?>
+    </div>
+
+</div>

@@ -1,0 +1,24 @@
+<?php
+
+// Output
+$output = array(
+    "sEcho" => $sEcho,
+    "iTotalRecords" => $iTotalRecords,
+    "iTotalDisplayRecords" => $iTotalDisplayRecords,
+    "aaData" => array()
+);
+
+foreach($areas as $area)
+{
+    $actions = '<a class="icon edit" title="Edit" href="' . $this->url(
+        'sales/default', array('controller' => 'area', 'action'=>'edit', 'id' => $area->getId())) . '"></a>' .
+	'<a class="icon delete" title="Delete" href="' . $this->url(
+	'inventory/default', array('controller' => 'area', 'action'=>'delete', 'id' => $area->getId())) . '"></a>';
+	 
+	$row = array();
+	$row[] = $this->escapeHtml($area->getCode());
+        $row[] = $this->escapeHtml($area->getDescription());
+	$row[] = $actions;
+	$output['aaData'][] = $row;
+}
+echo json_encode($output);
