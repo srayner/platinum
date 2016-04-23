@@ -1,0 +1,18 @@
+<h2>Purchasing</h2>
+
+<h3>Transactions</h3>
+<a href="<?php echo $this->url('purchasing/default', array(
+    'controller' => 'order',
+    'action'     =>'create'
+));?>">Create Purchase Order</a><br>
+
+<h3>Inquiries</h3>
+<a href="<?php echo $this->url('purchasing/default', array(
+    'controller' => 'order'
+));?>">View Purchase Orders</a><br>
+
+<h3>Maintenance</h3>
+<a href="<?php echo $this->url('purchasing/default', array(
+    'controller'=>'account'
+));?>">Supplier Accounts</a><br>
+

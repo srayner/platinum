@@ -18,25 +18,25 @@ return array(
         'default' => array(
             // And finally, here is where we define our page hierarchy
             array(
-                'label' => 'Home',
-                'route' => 'default',
+                'label'      => 'Home',
+                'route'      => 'default',
                 'controller' => 'index'
             ),
             array(
-        		'label' => 'Inventory',
-        		'route' => 'inventory',
+                'label'      => 'Inventory',
+        	'route'      => 'inventory',
                 'controller' => 'index'
-        	),
-        	array(
-        		'label' => 'Sales',
-        		'route' => 'sales',
-        		'controller' => 'sales'
-        	),	
-        	array(
-        		'label' => 'Purchasing',
-        		'route' => 'users',
-        		'controller' => 'users'
-        	),
+            ),
+            array(
+                'label'      => 'Sales',
+        	'route'      => 'sales',
+        	'controller' => 'sales'
+            ),	
+            array(
+                'label'      => 'Purchasing',
+        	'route'      => 'purchasing',
+        	'controller' => 'index'
+            ),
         ),
     ),
 );
