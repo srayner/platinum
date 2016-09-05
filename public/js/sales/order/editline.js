@@ -1,6 +1,12 @@
-$(document).ready(function(){
-    $('.typeahead').typeahead({
-        name: 'itemCode',
-        prefetch: 'inventory/items/search'
-    });
-});  
+$(function(){
+
+	$('.typeahead').typeahead({
+		ajax: {
+			url: '/inventory/items/search',
+			triggerLength: 1,
+		},
+		display: 'item_code',
+		val: 'id'
+	});
+	
+});
