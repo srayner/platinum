@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+  webserver:
+    build: ./docker/webserver
+    image: platinum_web
+    container_name: platinum
+    #  ports:
+    #    - "80:80"
+    #    - "443:443"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - traefik_default
+    labels:
+      - "traefix.enable=true"
+      - "traefik.http.routers.platinum.entrypoints=web"
+      - "traefik.http.routers.platinum.rule=Host(`platinum.docker.localhost`)"
+    links:
+      - db
+
+  db:
+    image: mysql:5.7
+    container_name: platinum-db
+    #  ports:
+    #    - "3306:3306"
+    volumes:
+      - ./data/db:/var/lib/mysql
+      - ./data/db_schema/mysql:/db_schema
+    networks:
+      - traefik_default
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=platinum
+      - MYSQL_USER=platinum
+      - MYSQL_PASSWORD=platinum_pwd
+
+networks:
+  traefik_default:
+    external: true
